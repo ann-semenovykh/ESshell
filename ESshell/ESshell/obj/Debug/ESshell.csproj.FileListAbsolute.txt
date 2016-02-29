@@ -1,0 +1,9 @@
+c:\users\user\documents\visual studio 2013\Projects\ESshell\ESshell\bin\Debug\ESshell.exe.config
+c:\users\user\documents\visual studio 2013\Projects\ESshell\ESshell\bin\Debug\ESshell.exe
+c:\users\user\documents\visual studio 2013\Projects\ESshell\ESshell\bin\Debug\ESshell.pdb
+c:\users\user\documents\visual studio 2013\Projects\ESshell\ESshell\obj\Debug\ESshell.csprojResolveAssemblyReference.cache
+c:\users\user\documents\visual studio 2013\Projects\ESshell\ESshell\obj\Debug\ESshell.Properties.Resources.resources
+c:\users\user\documents\visual studio 2013\Projects\ESshell\ESshell\obj\Debug\ESshell.csproj.GenerateResource.Cache
+c:\users\user\documents\visual studio 2013\Projects\ESshell\ESshell\obj\Debug\ESshell.exe
+c:\users\user\documents\visual studio 2013\Projects\ESshell\ESshell\obj\Debug\ESshell.pdb
+c:\users\user\documents\visual studio 2013\Projects\ESshell\ESshell\obj\Debug\ESshell.frmMain.resources
