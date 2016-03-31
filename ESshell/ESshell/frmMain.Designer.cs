@@ -58,6 +58,8 @@
             this.tabDomen = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataDomen = new System.Windows.Forms.DataGridView();
+            this.DomenName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DomenVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSave = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -87,8 +89,6 @@
             this.bindDomen = new System.Windows.Forms.BindingSource(this.components);
             this.bindVars = new System.Windows.Forms.BindingSource(this.components);
             this.bindRules = new System.Windows.Forms.BindingSource(this.components);
-            this.DomenName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DomenVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabDomen.SuspendLayout();
@@ -345,19 +345,28 @@
             // 
             // dataDomen
             // 
-            this.dataDomen.AutoGenerateColumns = false;
             this.dataDomen.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dataDomen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataDomen.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DomenName,
             this.DomenVal});
-            this.dataDomen.DataSource = this.bindDomen;
             this.dataDomen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataDomen.Location = new System.Drawing.Point(0, 0);
             this.dataDomen.Name = "dataDomen";
             this.dataDomen.Size = new System.Drawing.Size(550, 494);
             this.dataDomen.TabIndex = 0;
             this.dataDomen.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataDomen_CellContentClick);
+            // 
+            // DomenName
+            // 
+            this.DomenName.HeaderText = "Имя домена";
+            this.DomenName.Name = "DomenName";
+            // 
+            // DomenVal
+            // 
+            this.DomenVal.HeaderText = "Значения домена";
+            this.DomenVal.Name = "DomenVal";
+            this.DomenVal.Width = 500;
             // 
             // btnSave
             // 
@@ -414,6 +423,7 @@
             this.btnDomenAdd.TabIndex = 0;
             this.btnDomenAdd.Text = "Добавить";
             this.btnDomenAdd.UseVisualStyleBackColor = true;
+            this.btnDomenAdd.Click += new System.EventHandler(this.btnDomenAdd_Click);
             // 
             // tabVars
             // 
@@ -618,17 +628,6 @@
             this.btnRuleAdd.Text = "Добавить";
             this.btnRuleAdd.UseVisualStyleBackColor = true;
             // 
-            // DomenName
-            // 
-            this.DomenName.HeaderText = "Имя домена";
-            this.DomenName.Name = "DomenName";
-            // 
-            // DomenVal
-            // 
-            this.DomenVal.HeaderText = "Значения домена";
-            this.DomenVal.Name = "DomenVal";
-            this.DomenVal.Width = 500;
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -704,7 +703,6 @@
         private System.Windows.Forms.ToolStripMenuItem удалитьToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem изменитьToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem удалитьToolStripMenuItem2;
-        private System.Windows.Forms.DataGridView dataDomen;
         private System.Windows.Forms.DataGridView dataVars;
         private System.Windows.Forms.DataGridViewTextBoxColumn VarName;
         private System.Windows.Forms.DataGridViewTextBoxColumn VarType;
@@ -732,6 +730,7 @@
         private System.Windows.Forms.BindingSource bindRules;
         private System.Windows.Forms.DataGridViewTextBoxColumn DomenName;
         private System.Windows.Forms.DataGridViewTextBoxColumn DomenVal;
+        public System.Windows.Forms.DataGridView dataDomen;
     }
 }
 

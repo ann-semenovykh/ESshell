@@ -41,5 +41,11 @@ namespace ESshell
         {
             
         }
+
+        private void btnDomenAdd_Click(object sender, EventArgs e)
+        {
+            frmAddDomen frm = new frmAddDomen(this);
+            frm.ShowDialog(this);
+        }
     }
 }

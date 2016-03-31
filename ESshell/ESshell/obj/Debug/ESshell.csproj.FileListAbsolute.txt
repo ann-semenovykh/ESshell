@@ -7,3 +7,13 @@ c:\users\user\documents\visual studio 2013\Projects\ESshell\ESshell\obj\Debug\ES
 c:\users\user\documents\visual studio 2013\Projects\ESshell\ESshell\obj\Debug\ESshell.exe
 c:\users\user\documents\visual studio 2013\Projects\ESshell\ESshell\obj\Debug\ESshell.pdb
 c:\users\user\documents\visual studio 2013\Projects\ESshell\ESshell\obj\Debug\ESshell.frmMain.resources
+C:\Users\user\Documents\GitHub\ESshell\ESshell\ESshell\bin\Debug\ESshell.exe.config
+C:\Users\user\Documents\GitHub\ESshell\ESshell\ESshell\obj\Debug\ESshell.exe
+C:\Users\user\Documents\GitHub\ESshell\ESshell\ESshell\obj\Debug\ESshell.pdb
+C:\Users\user\Documents\GitHub\ESshell\ESshell\ESshell\bin\Debug\ESshell.exe
+C:\Users\user\Documents\GitHub\ESshell\ESshell\ESshell\bin\Debug\ESshell.pdb
+C:\Users\user\Documents\GitHub\ESshell\ESshell\ESshell\obj\Debug\ESshell.csprojResolveAssemblyReference.cache
+C:\Users\user\Documents\GitHub\ESshell\ESshell\ESshell\obj\Debug\ESshell.frmAddDomen.resources
+C:\Users\user\Documents\GitHub\ESshell\ESshell\ESshell\obj\Debug\ESshell.frmMain.resources
+C:\Users\user\Documents\GitHub\ESshell\ESshell\ESshell\obj\Debug\ESshell.Properties.Resources.resources
+C:\Users\user\Documents\GitHub\ESshell\ESshell\ESshell\obj\Debug\ESshell.csproj.GenerateResource.Cache

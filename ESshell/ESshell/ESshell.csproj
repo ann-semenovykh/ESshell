@@ -49,6 +49,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ESStructure.xsd</DependentUpon>
     </Compile>
+    <Compile Include="frmAddDomen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddDomen.Designer.cs">
+      <DependentUpon>frmAddDomen.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -57,6 +63,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmAddDomen.resx">
+      <DependentUpon>frmAddDomen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
