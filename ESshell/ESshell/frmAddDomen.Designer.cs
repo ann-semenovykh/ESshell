@@ -74,7 +74,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(107, 32);
             this.btnSave.TabIndex = 3;
-            this.btnSave.Text = "Сохранить";
+            this.btnSave.Text = "Добавить";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -100,8 +100,10 @@
             this.Controls.Add(this.dataVDom);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmAddDomen";
-            this.Text = "frmAddDomen";
+            this.Text = "Добавить домен";
             ((System.ComponentModel.ISupportInitialize)(this.dataVDom)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

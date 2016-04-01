@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ESys" targetNamespace="http://tempuri.org/ESys.xsd" xmlns:mstns="http://tempuri.org/ESys.xsd" xmlns="http://tempuri.org/ESys.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ESys" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ESys" msprop:Generator_UserDSName="ESys">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Domens" msprop:Generator_TableClassName="DomensDataTable" msprop:Generator_TableVarName="tableDomens" msprop:Generator_TablePropName="Domens" msprop:Generator_RowDeletingName="DomensRowDeleting" msprop:Generator_RowChangingName="DomensRowChanging" msprop:Generator_RowEvHandlerName="DomensRowChangeEventHandler" msprop:Generator_RowDeletedName="DomensRowDeleted" msprop:Generator_UserTableName="Domens" msprop:Generator_RowChangedName="DomensRowChanged" msprop:Generator_RowEvArgName="DomensRowChangeEvent" msprop:Generator_RowClassName="DomensRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Имя_домена" msdata:Caption="Имя домена" msprop:Generator_ColumnVarNameInTable="columnИмя_домена" msprop:Generator_ColumnPropNameInRow="Имя_домена" msprop:Generator_ColumnPropNameInTable="Имя_доменаColumn" msprop:Generator_UserColumnName="Имя_домена" type="xs:string" minOccurs="0" />
+              <xs:element name="Значения_домена" msprop:Generator_ColumnVarNameInTable="columnЗначения_домена" msprop:Generator_ColumnPropNameInRow="Значения_домена" msprop:Generator_ColumnPropNameInTable="Значения_доменаColumn" msprop:Generator_UserColumnName="Значения_домена" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DomenVal" msprop:Generator_TableClassName="DomenValDataTable" msprop:Generator_TableVarName="tableDomenVal" msprop:Generator_TablePropName="DomenVal" msprop:Generator_RowDeletingName="DomenValRowDeleting" msprop:Generator_RowChangingName="DomenValRowChanging" msprop:Generator_RowEvHandlerName="DomenValRowChangeEventHandler" msprop:Generator_RowDeletedName="DomenValRowDeleted" msprop:Generator_UserTableName="DomenVal" msprop:Generator_RowChangedName="DomenValRowChanged" msprop:Generator_RowEvArgName="DomenValRowChangeEvent" msprop:Generator_RowClassName="DomenValRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Имя_домена" msprop:Generator_ColumnVarNameInTable="columnИмя_домена" msprop:Generator_ColumnPropNameInRow="Имя_домена" msprop:Generator_ColumnPropNameInTable="Имя_доменаColumn" msprop:Generator_UserColumnName="Имя_домена" type="xs:string" minOccurs="0" />
+              <xs:element name="Значение_домена" msprop:Generator_ColumnVarNameInTable="columnЗначение_домена" msprop:Generator_ColumnPropNameInRow="Значение_домена" msprop:Generator_ColumnPropNameInTable="Значение_доменаColumn" msprop:Generator_UserColumnName="Значение_домена" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="DomensKey1">
+      <xs:selector xpath=".//mstns:Domens" />
+      <xs:field xpath="mstns:Имя_домена" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -58,8 +58,6 @@
             this.tabDomen = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataDomen = new System.Windows.Forms.DataGridView();
-            this.DomenName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DomenVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSave = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -73,6 +71,7 @@
             this.VarType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VarDomen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VarQuest = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindVars = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnVarDel = new System.Windows.Forms.Button();
             this.btnVarEdit = new System.Windows.Forms.Button();
@@ -82,13 +81,12 @@
             this.dataRules = new System.Windows.Forms.DataGridView();
             this.RuleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RuleText = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindRules = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnRuleDel = new System.Windows.Forms.Button();
             this.btnRuleEdit = new System.Windows.Forms.Button();
             this.btnRuleAdd = new System.Windows.Forms.Button();
             this.bindDomen = new System.Windows.Forms.BindingSource(this.components);
-            this.bindVars = new System.Windows.Forms.BindingSource(this.components);
-            this.bindRules = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabDomen.SuspendLayout();
@@ -104,6 +102,7 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataVars)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindVars)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.tabRules.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
@@ -111,10 +110,9 @@
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataRules)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindRules)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindDomen)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindVars)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindRules)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -128,6 +126,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(849, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // файлToolStripMenuItem
             // 
@@ -237,6 +236,7 @@
             this.добавитьToolStripMenuItem1.Name = "добавитьToolStripMenuItem1";
             this.добавитьToolStripMenuItem1.Size = new System.Drawing.Size(128, 22);
             this.добавитьToolStripMenuItem1.Text = "Добавить";
+            this.добавитьToolStripMenuItem1.Click += new System.EventHandler(this.добавитьToolStripMenuItem1_Click);
             // 
             // изменитьToolStripMenuItem1
             // 
@@ -345,28 +345,18 @@
             // 
             // dataDomen
             // 
+            this.dataDomen.AllowUserToAddRows = false;
             this.dataDomen.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dataDomen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataDomen.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.DomenName,
-            this.DomenVal});
             this.dataDomen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataDomen.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataDomen.Location = new System.Drawing.Point(0, 0);
+            this.dataDomen.MultiSelect = false;
             this.dataDomen.Name = "dataDomen";
+            this.dataDomen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataDomen.Size = new System.Drawing.Size(550, 494);
             this.dataDomen.TabIndex = 0;
             this.dataDomen.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataDomen_CellContentClick);
-            // 
-            // DomenName
-            // 
-            this.DomenName.HeaderText = "Имя домена";
-            this.DomenName.Name = "DomenName";
-            // 
-            // DomenVal
-            // 
-            this.DomenVal.HeaderText = "Значения домена";
-            this.DomenVal.Name = "DomenVal";
-            this.DomenVal.Width = 500;
             // 
             // btnSave
             // 
@@ -405,6 +395,7 @@
             this.btnDomenDel.TabIndex = 2;
             this.btnDomenDel.Text = "Удалить";
             this.btnDomenDel.UseVisualStyleBackColor = true;
+            this.btnDomenDel.Click += new System.EventHandler(this.btnDomenDel_Click);
             // 
             // btnDomenEdit
             // 
@@ -414,6 +405,7 @@
             this.btnDomenEdit.TabIndex = 1;
             this.btnDomenEdit.Text = "Изменить";
             this.btnDomenEdit.UseVisualStyleBackColor = true;
+            this.btnDomenEdit.Click += new System.EventHandler(this.btnDomenEdit_Click);
             // 
             // btnDomenAdd
             // 
@@ -628,6 +620,10 @@
             this.btnRuleAdd.Text = "Добавить";
             this.btnRuleAdd.UseVisualStyleBackColor = true;
             // 
+            // bindDomen
+            // 
+            this.bindDomen.CurrentChanged += new System.EventHandler(this.bindDomen_CurrentChanged);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -653,6 +649,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataVars)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindVars)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.tabRules.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
@@ -660,10 +657,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataRules)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindRules)).EndInit();
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindDomen)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindVars)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindRules)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -728,8 +724,6 @@
         private System.Windows.Forms.BindingSource bindDomen;
         private System.Windows.Forms.BindingSource bindVars;
         private System.Windows.Forms.BindingSource bindRules;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DomenName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DomenVal;
         public System.Windows.Forms.DataGridView dataDomen;
     }
 }

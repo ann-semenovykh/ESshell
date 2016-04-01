@@ -19,17 +19,65 @@ namespace ESshell
             parent=par;
         }
 
+        
         private void btnSave_Click(object sender, EventArgs e)
         {
-            string s="";
+            if (txtName.Text == "")
+                MessageBox.Show("Заполните имя домена");
+            else
+                if (empty_domen())
+            try
+            {
+                reuse_domen();
+                parent.domen.AddDomensRow(txtName.Text, "");
+            
             for (int i = 0; i < dataVDom.RowCount; i++)
             {
-                if (dataVDom.Rows[i].Cells[0].Value!=null)
-                    s += dataVDom.Rows[i].Cells[0].Value.ToString();
-                s += ";";
+                if (dataVDom.Rows[i].Cells[0].Value != null)
+                    parent.domenval.AddDomenValRow(txtName.Text, dataVDom.Rows[i].Cells[0].Value.ToString());
             }
-            s.Remove(s.Length - 1, 1);
-            parent.dataDomen.Rows.Add(txtName.Text, s);
+            add_value();
+            dataVDom.Rows.Clear();
+            txtName.Clear();
+            txtName.Focus();
+            }
+            catch (System.Data.ConstraintException ex)
+            { 
+                MessageBox.Show(ex.Message);
+                txtName.Focus();  
+            }
+            finally { }
+        }
+        private void add_value()
+        {
+            string vals =String.Join("; ", from domens in parent.domenval.AsEnumerable() 
+                       where domens.Field<string>("Имя_домена")==txtName.Text 
+                       select domens.Field<string>("Значение_домена"));
+            parent.domen.Select("Имя_домена =\'" + txtName.Text+"\'")[0]["Значения_домена"]=vals;
+        }
+        private int reuse_domen()
+        {
+            return 1;
+        }
+        private bool empty_domen()
+        {
+            
+            for (int i = 0; i < dataVDom.RowCount; i++)
+            if (dataVDom.Rows[i].Cells[0].Value != null && dataVDom.Rows[i].Cells[0].Value.ToString().Trim() == "")
+                {
+                    dataVDom.Rows.RemoveAt(i); i--; 
+                }
+            
+            if (1 == dataVDom.RowCount)
+            {
+                MessageBox.Show("Заполните значения домена");
+                dataVDom.Focus();
+                dataVDom.Rows.Clear();
+                return false;
+            }
+            else return true;
+            
+           
         }
     }
 }

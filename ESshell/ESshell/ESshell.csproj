@@ -44,10 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ESStructure.Designer.cs">
+    <Compile Include="ESystem.cs">
+      <DependentUpon>ESystem.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ESystem.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ESStructure.xsd</DependentUpon>
+      <DependentUpon>ESystem.xsd</DependentUpon>
     </Compile>
     <Compile Include="frmAddDomen.cs">
       <SubType>Form</SubType>
@@ -63,6 +67,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorkMemory.cs" />
     <EmbeddedResource Include="frmAddDomen.resx">
       <DependentUpon>frmAddDomen.cs</DependentUpon>
     </EmbeddedResource>
@@ -78,16 +83,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="ESStructure.xsc">
-      <DependentUpon>ESStructure.xsd</DependentUpon>
+    <None Include="ESystem.xsc">
+      <DependentUpon>ESystem.xsd</DependentUpon>
     </None>
-    <None Include="ESStructure.xsd">
+    <None Include="ESystem.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ESStructure.Designer.cs</LastGenOutput>
+      <LastGenOutput>ESystem.Designer.cs</LastGenOutput>
     </None>
-    <None Include="ESStructure.xss">
-      <DependentUpon>ESStructure.xsd</DependentUpon>
+    <None Include="ESystem.xss">
+      <DependentUpon>ESystem.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
