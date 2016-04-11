@@ -103,7 +103,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmAddDomen";
-            this.Text = "Добавить домен";
+            this.Text = "Домен";
+            this.Load += new System.EventHandler(this.frmAddDomen_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataVDom)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
