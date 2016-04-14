@@ -24,14 +24,14 @@ namespace ESshell
             dataDomen.DataSource = bindDomen;
             dataDomen.Columns[0].HeaderText = "Имя домена";
             dataDomen.Columns[1].HeaderText = "Значения домена";
-            dataDomen.Columns[0].Width = 180;
-            dataDomen.Columns[1].Width = 666;
+            //dataDomen.Columns[0].Width = 180;
+            //dataDomen.Columns[1].Width = 666;
 
             
             bindDomenVal.DataSource = es.DomenVal;
             dataDomenVal.DataSource = bindDomenVal;
             dataDomenVal.Columns[0].Visible = false;
-            dataDomenVal.Columns[1].Width = 170;
+            //dataDomenVal.Columns[1].Width = 170;
 
             bindVars.DataSource = es.Variable;
             dataVars.DataSource = bindVars;
@@ -43,9 +43,9 @@ namespace ESshell
 
             bindRules.DataSource = es.Rules;
             dataRules.DataSource = bindRules;
-            dataRules.Columns[0].Width = 100;
-            dataRules.Columns[1].Width = 300;
-            dataRules.Columns[2].Width = 400;
+            //dataRules.Columns[0].Width = 100;
+            //dataRules.Columns[1].Width = 300;
+            //dataRules.Columns[2].Width = 400;
         }
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
@@ -121,16 +121,27 @@ namespace ESshell
         {
             if (dataDomen.SelectedCells == null)
                 MessageBox.Show("Выберите домен для изменения");
-            else
-                if (check_dom_in_rule(dataDomen.SelectedRows[0].Cells[0].Value.ToString()))
-                {
+            else{
 
                     ESys.DomensRow dr = es.Domens.Where(e => e.Имя_домена == dataDomen.SelectedRows[0].Cells[0].Value.ToString()).First();
                     frmAddDomen frm = new frmAddDomen(this, dr, dataDomen.SelectedRows[0].Index);
-                    frm.ShowDialog(this);
-                    
+                if (!check_dom_in_rule(dataDomen.SelectedRows[0].Cells[0].Value.ToString()))
+                {
+                    MessageBox.Show("Функциональность ограничена\nЗначения домена уже используются в правилах\nИзменение значений запрещено", "Внимание");
+                    frm.dataVDom.Enabled = false;
                 }
-                else MessageBox.Show("Значения домена уже используются в правилах","Изменение запрещено");
+
+                frm.ShowDialog(this);
+                }
+                //if (check_dom_in_rule(dataDomen.SelectedRows[0].Cells[0].Value.ToString()))
+                //{
+
+                //    ESys.DomensRow dr = es.Domens.Where(e => e.Имя_домена == dataDomen.SelectedRows[0].Cells[0].Value.ToString()).First();
+                //    frmAddDomen frm = new frmAddDomen(this, dr, dataDomen.SelectedRows[0].Index);
+                //    frm.ShowDialog(this);
+                    
+                //}
+                //else MessageBox.Show("Значения домена уже используются в правилах","Изменение запрещено");
         }
         private void добавитьToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -376,14 +387,23 @@ namespace ESshell
             if (dataVars.SelectedCells == null)
                 MessageBox.Show("Выберите переменную для изменения");
             else
-
-                if (check_var_in_rule(dataVars.SelectedRows[0].Cells[0].Value.ToString()))
                 {
                 ESys.VariableRow dr = es.Variable.FindByИмя(dataVars.SelectedRows[0].Cells[0].Value.ToString());
                 frmAddVar frm = new frmAddVar(this, dr, dataVars.SelectedRows[0].Index);
+                if (!check_var_in_rule(dataVars.SelectedRows[0].Cells[0].Value.ToString()))
+                {
+                    MessageBox.Show("Функциональность ограничена\nПеременная уже используется в правиле\nИзменение домена запрещено", "Внимание");
+                    frm.cmbDomen.Enabled = false;
+                }
                 frm.ShowDialog(this);
                 }
-                else { MessageBox.Show("Переменная уже используется в правиле", "Изменение запрещено"); }
+        //        if (check_var_in_rule(dataVars.SelectedRows[0].Cells[0].Value.ToString()))
+        //        {
+        //        ESys.VariableRow dr = es.Variable.FindByИмя(dataVars.SelectedRows[0].Cells[0].Value.ToString());
+        //        frmAddVar frm = new frmAddVar(this, dr, dataVars.SelectedRows[0].Index);
+        //        frm.ShowDialog(this);
+        //        }
+        //        else { MessageBox.Show("Переменная уже используется в правиле", "Изменение запрещено"); }
         }
 
         private void btnVarAdd_Click(object sender, EventArgs e)

@@ -146,6 +146,7 @@
             this.Name = "frmAddFact";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Факт";
+            this.Shown += new System.EventHandler(this.frmAddFact_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.eSys)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.variableBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.domenValBindingSource)).EndInit();

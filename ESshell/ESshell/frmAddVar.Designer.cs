@@ -171,6 +171,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Переменная";
             this.Load += new System.EventHandler(this.frmAddVar_Load);
+            this.Shown += new System.EventHandler(this.frmAddVar_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -183,11 +184,11 @@
         private System.Windows.Forms.ComboBox cmbType;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cmbDomen;
         private System.Windows.Forms.TextBox txtQuest;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnAddDom;
+        public System.Windows.Forms.ComboBox cmbDomen;
     }
 }

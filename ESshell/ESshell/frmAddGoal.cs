@@ -36,5 +36,14 @@ namespace ESshell
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
+        private void frmAddGoal_Shown(object sender, EventArgs e)
+        {
+            if (cmbGoal.Items.Count == 0)
+            {
+                MessageBox.Show("Доступных переменных не найдено", "Ошибка");
+                this.Close();
+            }
+        }
     }
 }

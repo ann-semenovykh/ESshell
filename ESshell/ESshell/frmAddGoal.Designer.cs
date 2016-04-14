@@ -81,6 +81,7 @@
             this.Name = "frmAddGoal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Цель";
+            this.Shown += new System.EventHandler(this.frmAddGoal_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.bindGoal)).EndInit();
             this.ResumeLayout(false);
 

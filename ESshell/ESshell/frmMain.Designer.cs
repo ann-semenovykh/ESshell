@@ -359,6 +359,7 @@
             // 
             this.dataRules.AllowDrop = true;
             this.dataRules.AllowUserToAddRows = false;
+            this.dataRules.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataRules.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dataRules.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataRules.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -535,6 +536,7 @@
             // 
             this.dataDomen.AllowDrop = true;
             this.dataDomen.AllowUserToAddRows = false;
+            this.dataDomen.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataDomen.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dataDomen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataDomen.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -553,6 +555,7 @@
             this.dataDomenVal.AllowDrop = true;
             this.dataDomenVal.AllowUserToAddRows = false;
             this.dataDomenVal.AllowUserToDeleteRows = false;
+            this.dataDomenVal.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataDomenVal.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dataDomenVal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataDomenVal.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;

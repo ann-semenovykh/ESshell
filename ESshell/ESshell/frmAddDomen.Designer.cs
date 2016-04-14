@@ -55,6 +55,7 @@
             // 
             // dataVDom
             // 
+            this.dataVDom.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataVDom.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataVDom.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DValue});
@@ -116,9 +117,9 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.DataGridView dataVDom;
         private System.Windows.Forms.DataGridViewTextBoxColumn DValue;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
+        public System.Windows.Forms.DataGridView dataVDom;
     }
 }

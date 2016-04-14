@@ -18,6 +18,8 @@ namespace ESshell
         string maingoal;
         string currentvariable;
         string savedquest;
+        
+        bool remember_askable = false;
         public frmConsult(ESys exsys,string g)
         {
             InitializeComponent();
@@ -31,11 +33,23 @@ namespace ESshell
 
         private void frmConsult_Load(object sender, EventArgs e)
         {
-            string tmp; 
-                run(maingoal,out tmp);
-                if (tmp != null)
-                    MessageBox.Show(tmp);
-                else display_values();
+            string tmp;
+            List<string> conflictset = new List<string>();
+            add_rules_to_conflictset(conflictset, maingoal);
+            int i = 0;
+            int check;
+            while (i < conflictset.Count())              //choose first rule
+            {
+                check = check_lside(conflictset[i]);
+                if (check == 1)
+                    break;
+                else remember_askable = remember_askable || (check == -1);
+                if (remember_askable)
+                    break;
+
+                i++;
+            } 
+            display_values();
             cmbAnswer.Focus();
         }
         private string in_workmemory(string name)
@@ -55,9 +69,9 @@ namespace ESshell
         ESys.FactRow[] find_left_side(string rule)
         {
             return 
-                (from fact in es.Fact
-                 join lside in es.LSide
-                 on fact.id equals lside.Fact
+                (from lside in es.LSide
+                 join fact in es.Fact
+                 on lside.Fact equals fact.id
                  where lside.Имя==rule
                  select fact).ToArray();
         }
@@ -82,14 +96,15 @@ namespace ESshell
                         goto case "Запрашиваемая";
                     else return Convert.ToInt32(found_value == value);
                 case "Запрашиваемая":
-                    
+                    if (!remember_askable)
+                    {
                         bindAnswer.DataSource = es.DomenVal.Where(e => e.Имя_домена == es.Variable.FindByИмя(variable).Домен);
                         cmbAnswer.DisplayMember = "Значение_домена";
-                        
+
                         savedquest = es.Variable.FindByИмя(variable).Вопрос == String.Empty ? variable + "?" : es.Variable.FindByИмя(variable).Вопрос;
                         currentvariable = variable;
-                        return -1;
-                    
+                       
+                    } return -1;
                 default: return -2;
             }
         }
@@ -131,7 +146,6 @@ namespace ESshell
                 add_rules_to_conflictset(conflictset, goal);
                 int i=0;
                 int check;
-                bool remember_askable=false;
                 while (i < conflictset.Count())              //choose first rule
                 {
                     check=check_lside(conflictset[i]);
@@ -216,6 +230,7 @@ namespace ESshell
             DataRow row = cmbAnswer.SelectedItem as DataRow;
             add_to_workmemory(currentvariable, row[1].ToString());
             string tmp;
+            remember_askable = false;
             int status=run(maingoal,out tmp);
             if (status == 0)
             {

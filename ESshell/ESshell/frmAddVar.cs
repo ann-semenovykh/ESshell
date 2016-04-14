@@ -25,7 +25,7 @@ namespace ESshell
             editrow = index;
             if (index >= 0)
                 Load_value(par, row);
-            else { cmbDomen.SelectedIndex = 0; cmbType.SelectedIndex = 0; }
+           
         }
         public void Load_value(frmMain par, ESys.VariableRow row)
         {
@@ -152,6 +152,17 @@ namespace ESshell
         private void frmAddVar_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void frmAddVar_Shown(object sender, EventArgs e)
+        {
+            if (cmbDomen.Items.Count==0)
+            {
+                MessageBox.Show("Домены не добавлены\nНельзя добавить переменную", "Ошибка");
+                this.Close();
+            }
+            else if(editrow<0)
+            { cmbDomen.SelectedIndex = 0; cmbType.SelectedIndex = 0; }
         }
         
     }

@@ -73,5 +73,14 @@ namespace ESshell
         {
             this.Close();
         }
+
+        private void frmAddFact_Shown(object sender, EventArgs e)
+        {
+            if (cmbVar.Items.Count==0)
+            {
+                MessageBox.Show("Переменные не добавлены\nНельзя добавить факт", "Ошибка");
+                this.Close();
+            }
+        }
     }
 }
