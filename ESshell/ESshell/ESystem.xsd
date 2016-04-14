@@ -72,6 +72,21 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="WorkMemory" msprop:Generator_TableClassName="WorkMemoryDataTable" msprop:Generator_TableVarName="tableWorkMemory" msprop:Generator_TablePropName="WorkMemory" msprop:Generator_RowDeletingName="WorkMemoryRowDeleting" msprop:Generator_RowChangingName="WorkMemoryRowChanging" msprop:Generator_RowEvHandlerName="WorkMemoryRowChangeEventHandler" msprop:Generator_RowDeletedName="WorkMemoryRowDeleted" msprop:Generator_UserTableName="WorkMemory" msprop:Generator_RowChangedName="WorkMemoryRowChanged" msprop:Generator_RowEvArgName="WorkMemoryRowChangeEvent" msprop:Generator_RowClassName="WorkMemoryRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="fact" msprop:Generator_ColumnVarNameInTable="columnfact" msprop:Generator_ColumnPropNameInRow="fact" msprop:Generator_ColumnPropNameInTable="factColumn" msprop:Generator_UserColumnName="fact" type="xs:int" minOccurs="0" />
+              <xs:element name="status" msprop:Generator_ColumnVarNameInTable="columnstatus" msprop:Generator_ColumnPropNameInRow="status" msprop:Generator_ColumnPropNameInTable="statusColumn" msprop:Generator_UserColumnName="status" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ConflictSet" msprop:Generator_TableClassName="ConflictSetDataTable" msprop:Generator_TableVarName="tableConflictSet" msprop:Generator_TablePropName="ConflictSet" msprop:Generator_RowDeletingName="ConflictSetRowDeleting" msprop:Generator_RowChangingName="ConflictSetRowChanging" msprop:Generator_RowEvHandlerName="ConflictSetRowChangeEventHandler" msprop:Generator_RowDeletedName="ConflictSetRowDeleted" msprop:Generator_UserTableName="ConflictSet" msprop:Generator_RowChangedName="ConflictSetRowChanged" msprop:Generator_RowEvArgName="ConflictSetRowChangeEvent" msprop:Generator_RowClassName="ConflictSetRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="rule" msprop:Generator_ColumnVarNameInTable="columnrule" msprop:Generator_ColumnPropNameInRow="rule" msprop:Generator_ColumnPropNameInTable="ruleColumn" msprop:Generator_UserColumnName="rule" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="DomensKey1">
@@ -90,17 +105,17 @@
       <xs:selector xpath=".//mstns:Rules" />
       <xs:field xpath="mstns:Имя" />
     </xs:unique>
-    <xs:keyref name="FK_Rules_RSide" refer="Rules_Constraint1" msdata:ConstraintOnly="true">
-      <xs:selector xpath=".//mstns:RSide" />
-      <xs:field xpath="mstns:Имя" />
+    <xs:keyref name="Fact_WorkMemory" refer="Fact_Constraint1" msdata:ConstraintOnly="true" msdata:UpdateRule="None" msdata:DeleteRule="None">
+      <xs:selector xpath=".//mstns:WorkMemory" />
+      <xs:field xpath="mstns:fact" />
     </xs:keyref>
     <xs:keyref name="FK_Fact_RSide" refer="Fact_Constraint1" msdata:ConstraintOnly="true">
       <xs:selector xpath=".//mstns:RSide" />
       <xs:field xpath="mstns:Fact" />
     </xs:keyref>
-    <xs:keyref name="FK_Rules_LSide" refer="Rules_Constraint1" msdata:ConstraintOnly="true">
-      <xs:selector xpath=".//mstns:LSide" />
-      <xs:field xpath="mstns:Имя" />
+    <xs:keyref name="FK_Variable_Fact" refer="Constraint1" msdata:ConstraintOnly="true">
+      <xs:selector xpath=".//mstns:Fact" />
+      <xs:field xpath="mstns:Переменная" />
     </xs:keyref>
     <xs:keyref name="FK_Fact_LSide" refer="Fact_Constraint1" msdata:ConstraintOnly="true">
       <xs:selector xpath=".//mstns:LSide" />

@@ -18,7 +18,7 @@ namespace ESshell
         public frmAddVar(frmMain par, ESys.VariableRow row, int index)
         {
             InitializeComponent();
-            cmbType.Items.AddRange(new object[] {"Выводимая", "Запращиваемая"});
+            cmbType.Items.AddRange(new object[] {"Выводимая", "Запрашиваемая","Выводимо-запрашиваемая"});
             parent = par;
             for (int i = 0; i < par.es.Domens.Count; i++)
                 cmbDomen.Items.Add(par.es.Domens[i][0]);
@@ -69,10 +69,25 @@ namespace ESshell
         {
 
         }
-
+        private bool check_use(string variable,string domen)
+        {
+            string vars=String.Join(", ",
+                from var in parent.es.Variable
+                where var.Домен==domen && var.Имя!=variable
+                select var.Имя
+                );
+            if (vars != "")
+            {
+                DialogResult dialog = MessageBox.Show("Домен уже используется в переменной " + vars+"\nПродолжить?", "Внимание", MessageBoxButtons.YesNo);
+                if (dialog == DialogResult.Yes)
+                    return true;
+                else return false;
+            }
+            else return true;
+        }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtName.Text == "")
+            if (txtName.Text.Trim() == "")
             {
                 MessageBox.Show("Введите имя переменной");
                 txtName.Focus();
@@ -81,11 +96,23 @@ namespace ESshell
             {
                 try
                 {
-                    if (editrow >= 0)
-                        prepare_edit();
 
-                        parent.es.Variable.AddVariableRow(txtName.Text, cmbType.SelectedItem.ToString(),
-                            cmbDomen.SelectedItem.ToString(), txtQuest.Text);
+                    if (editrow >= 0)
+                        if (check_use(editname, cmbDomen.SelectedItem.ToString()))
+                        {
+
+                            ESys.VariableRow row = parent.es.Variable.FindByИмя(editname);
+                            row.Имя = txtName.Text.Trim();
+                            row.Тип = cmbType.SelectedItem.ToString();
+                            row.Домен = cmbDomen.SelectedItem.ToString();
+                            row.Вопрос = txtQuest.Text.Trim();
+                        }
+                        else return;
+                    else
+                        if (check_use("", cmbDomen.SelectedItem.ToString()))
+                            parent.es.Variable.AddVariableRow(txtName.Text.Trim(), cmbType.SelectedItem.ToString(),
+                                cmbDomen.SelectedItem.ToString(), txtQuest.Text.Trim());
+                        else return;
                     if (editrow<0)
                     {
                         txtName.Clear();
@@ -120,6 +147,11 @@ namespace ESshell
                 cmbDomen.Items.Add(parent.es.Domens[i][0]);
             cmbDomen.SelectedIndex = selection;
             this.Show();
+        }
+
+        private void frmAddVar_Load(object sender, EventArgs e)
+        {
+
         }
         
     }

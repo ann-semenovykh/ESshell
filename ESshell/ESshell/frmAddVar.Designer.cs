@@ -168,7 +168,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmAddVar";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Переменная";
+            this.Load += new System.EventHandler(this.frmAddVar_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

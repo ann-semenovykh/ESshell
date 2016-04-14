@@ -13,19 +13,55 @@ namespace ESshell
     public partial class frmAddRule : Form
     {
         private frmMain parent;
-        public frmAddRule(frmMain par, ESys.DomensRow row, int index)
+        private int editrow;
+        private string editname;
+        public frmAddRule(frmMain par, ESys.RulesRow row, int index)
         {
             InitializeComponent();
             //variableBindingSource.DataSource = par.es.Variable;
             //clmName.DataSource = variableBindingSource;
             //clmName.DisplayMember = "Имя";
             parent = par;
-            
+            editrow = index;
+            if (editrow >= 0)
+                prepare_edit(row);
         }
+        void prepare_edit(ESys.RulesRow row)
+        {
+            editname = row.Имя;
+            btnSave.Text = "Изменить";
+            txtName.Text = row.Имя;
+            IEnumerable<ESys.FactRow> facts =
+                from fact in parent.es.Fact
+                join lside in parent.es.LSide
+                on fact.id equals lside.Fact
+                where lside.Имя==editname
+                select fact;
+            foreach (ESys.FactRow f in facts)
+                dataLSide.Rows.Add(f.Переменная, f.Значение_переменной);
 
+            facts =
+                from fact in parent.es.Fact
+                join rside in parent.es.RSide
+                on fact.id equals rside.Fact
+                where rside.Имя==editname
+                select fact;
+            foreach (ESys.FactRow f in facts)
+                dataRSide.Rows.Add(f.Переменная, f.Значение_переменной);
+        }
+        
+        public static void prepare_edit(ESys es, string editname)
+        {
+            ESys.LSideRow[] rows = es.LSide.Where(e => e.Имя == editname).ToArray();
+            foreach (ESys.LSideRow row in rows)
+                es.LSide.RemoveLSideRow(row);
+            ESys.RSideRow[] rowss = es.RSide.Where(e => e.Имя == editname).ToArray();
+            foreach (ESys.RSideRow row in rowss)
+               es.RSide.RemoveRSideRow(row);
+        }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtName.Text == "")
+            if (txtName.Text.Trim() == "")
             { MessageBox.Show("Введите имя правила"); txtName.Focus(); }
             else
             if (dataRSide.RowCount == 0 || dataLSide.RowCount == 0)
@@ -34,7 +70,14 @@ namespace ESshell
             {
                 try
                 {
-                    ESys.RulesRow rule = parent.es.Rules.AddRulesRow(txtName.Text, "", "");
+                    ESys.RulesRow rule;
+                    if (editrow<0)
+                     rule= parent.es.Rules.AddRulesRow(txtName.Text.Trim(), "", "");
+                    else {
+                        rule = parent.es.Rules[editrow];
+                        rule.Имя = txtName.Text.Trim();
+                        prepare_edit(parent.es,editname);
+                    }
                     add_to_set(dataLSide, true);
                     add_to_set(dataRSide, false);
                     string left = String.Join(" AND ",
@@ -53,7 +96,8 @@ namespace ESshell
                         );
                     rule.Заключение = " THEN " + right;
                     rule.Посылка = left;
-
+                    if (editrow >= 0)
+                        this.Close();
 
                     dataLSide.Rows.Clear();
                     dataRSide.Rows.Clear();

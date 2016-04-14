@@ -7,21 +7,24 @@ c:\users\user\documents\visual studio 2013\Projects\ESshell\ESshell\obj\Debug\ES
 c:\users\user\documents\visual studio 2013\Projects\ESshell\ESshell\obj\Debug\ESshell.exe
 c:\users\user\documents\visual studio 2013\Projects\ESshell\ESshell\obj\Debug\ESshell.pdb
 c:\users\user\documents\visual studio 2013\Projects\ESshell\ESshell\obj\Debug\ESshell.frmMain.resources
-C:\Users\user\Documents\GitHub\ESshell\ESshell\ESshell\bin\Debug\ESshell.exe
+C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\bin\Debug\ESshell.exe
 C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\bin\Debug\ESystem.cs
 C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\bin\Debug\ESystem.Designer.cs
 C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\bin\Debug\ESystem.xsc
 C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\bin\Debug\ESystem.xsd
 C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\bin\Debug\ESystem.xss
 C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\bin\Debug\ESshell.exe.config
+C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\bin\Debug\ESshell.pdb
 C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\obj\Debug\ESshell.frmAddDomen.resources
 C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\obj\Debug\ESshell.frmAddFact.resources
+C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\obj\Debug\ESshell.frmAddGoal.resources
 C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\obj\Debug\ESshell.frmAddRule.resources
 C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\obj\Debug\ESshell.frmAddVar.resources
+C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\obj\Debug\ESshell.frmConsult.resources
+C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\obj\Debug\ESshell.frmExplain.resources
 C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\obj\Debug\ESshell.frmMain.resources
 C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\obj\Debug\ESshell.Properties.Resources.resources
 C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\obj\Debug\ESshell.csproj.GenerateResource.Cache
 C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\obj\Debug\ESshell.exe
 C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\obj\Debug\ESshell.pdb
-C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\bin\Debug\ESshell.pdb
 C:\Users\User\Documents\GitHub\ESshell\ESshell\ESshell\obj\Debug\ESshell.csprojResolveAssemblyReference.cache

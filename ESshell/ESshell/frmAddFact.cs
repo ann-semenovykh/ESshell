@@ -41,16 +41,19 @@ namespace ESshell
         {
             DataRowView tmp = cmbVar.SelectedItem as DataRowView;
             DataRowView tmp2 = cmbVal.SelectedItem as DataRowView;
-            
-            if (datagr.Rows.Cast<DataGridViewRow>().Where(ex => ex.Cells[0].Value.ToString().Equals(tmp["Имя"]) && ex.Cells[1].Value.ToString().Equals(tmp2["Значение_домена"])).Count()==0)
+
+            if (datagr.Rows.Cast<DataGridViewRow>().Where(ex => ex.Cells[0].Value.ToString().Equals(tmp["Имя"]) && ex.Cells[1].Value.ToString().Equals(tmp2["Значение_домена"])).Count() == 0)
+            {
                 if (editrow >= 0)
                 {
                     datagr.Rows[editrow].Cells[0].Value = tmp["Имя"];
                     datagr.Rows[editrow].Cells[1].Value = tmp2["Значение_домена"];
-                    this.Close();
                 }
                 else
                     datagr.Rows.Add(tmp["Имя"], tmp2["Значение_домена"]);
+
+                this.Close();
+            }
             else MessageBox.Show("Такой факт в таблице уже существует");
         }
 

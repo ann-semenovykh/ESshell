@@ -35,6 +35,8 @@
             this.clmVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.eSys = new ESshell.ESys();
             this.dataRSide = new System.Windows.Forms.DataGridView();
+            this.dataGridViewComboBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewComboBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -45,8 +47,6 @@
             this.btnLDel = new System.Windows.Forms.Button();
             this.btnLChange = new System.Windows.Forms.Button();
             this.btnLAdd = new System.Windows.Forms.Button();
-            this.dataGridViewComboBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewComboBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataLSide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.eSys)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataRSide)).BeginInit();
@@ -124,6 +124,22 @@
             this.dataRSide.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataRSide.Size = new System.Drawing.Size(406, 149);
             this.dataRSide.TabIndex = 4;
+            // 
+            // dataGridViewComboBoxColumn1
+            // 
+            this.dataGridViewComboBoxColumn1.HeaderText = "Имя переменной";
+            this.dataGridViewComboBoxColumn1.Name = "dataGridViewComboBoxColumn1";
+            this.dataGridViewComboBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewComboBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewComboBoxColumn1.Width = 180;
+            // 
+            // dataGridViewComboBoxColumn2
+            // 
+            this.dataGridViewComboBoxColumn2.HeaderText = "Значение переменной";
+            this.dataGridViewComboBoxColumn2.Name = "dataGridViewComboBoxColumn2";
+            this.dataGridViewComboBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewComboBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewComboBoxColumn2.Width = 180;
             // 
             // btnCancel
             // 
@@ -232,22 +248,6 @@
             this.btnLAdd.UseVisualStyleBackColor = true;
             this.btnLAdd.Click += new System.EventHandler(this.btnLAdd_Click);
             // 
-            // dataGridViewComboBoxColumn1
-            // 
-            this.dataGridViewComboBoxColumn1.HeaderText = "Имя переменной";
-            this.dataGridViewComboBoxColumn1.Name = "dataGridViewComboBoxColumn1";
-            this.dataGridViewComboBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewComboBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewComboBoxColumn1.Width = 180;
-            // 
-            // dataGridViewComboBoxColumn2
-            // 
-            this.dataGridViewComboBoxColumn2.HeaderText = "Значение переменной";
-            this.dataGridViewComboBoxColumn2.Name = "dataGridViewComboBoxColumn2";
-            this.dataGridViewComboBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewComboBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewComboBoxColumn2.Width = 180;
-            // 
             // frmAddRule
             // 
             this.AcceptButton = this.btnSave;
@@ -264,6 +264,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmAddRule";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Правило";
             this.Load += new System.EventHandler(this.frmAddRule_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataLSide)).EndInit();

@@ -67,6 +67,12 @@
     <Compile Include="frmAddFact.Designer.cs">
       <DependentUpon>frmAddFact.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAddGoal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddGoal.Designer.cs">
+      <DependentUpon>frmAddGoal.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAddRule.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +84,18 @@
     </Compile>
     <Compile Include="frmAddVar.Designer.cs">
       <DependentUpon>frmAddVar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConsult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConsult.Designer.cs">
+      <DependentUpon>frmConsult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmExplain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmExplain.Designer.cs">
+      <DependentUpon>frmExplain.cs</DependentUpon>
     </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
@@ -93,11 +111,20 @@
     <EmbeddedResource Include="frmAddFact.resx">
       <DependentUpon>frmAddFact.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmAddGoal.resx">
+      <DependentUpon>frmAddGoal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAddRule.resx">
       <DependentUpon>frmAddRule.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAddVar.resx">
       <DependentUpon>frmAddVar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConsult.resx">
+      <DependentUpon>frmConsult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmExplain.resx">
+      <DependentUpon>frmExplain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>

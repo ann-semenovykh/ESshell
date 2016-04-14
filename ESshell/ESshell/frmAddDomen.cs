@@ -37,23 +37,21 @@ namespace ESshell
         
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtName.Text == "")
+            if (txtName.Text.Trim() == "")
                 MessageBox.Show("Заполните имя домена");
             else
                 if (empty_domen())
             try
             {
                 if (editrow < 0)
-                    parent.es.Domens.AddDomensRow(txtName.Text, "");
+                    parent.es.Domens.AddDomensRow(txtName.Text.Trim(), "");
                 else prepare_edit();
-                reuse_domen();
-            
             for (int i = 0; i < dataVDom.RowCount; i++)
             {
-                if (dataVDom.Rows[i].Cells[0].Value != null)
-                    parent.es.DomenVal.AddDomenValRow(txtName.Text, dataVDom.Rows[i].Cells[0].Value.ToString());
+                if (dataVDom.Rows[i].Cells[0].Value != null && not_in(txtName.Text.Trim(), dataVDom.Rows[i].Cells[0].Value.ToString().Trim()))
+                    parent.es.DomenVal.AddDomenValRow(txtName.Text.Trim(), dataVDom.Rows[i].Cells[0].Value.ToString().Trim());
             }
-            add_value();
+            add_value(parent,txtName.Text);
             if (editrow < 0)
             {
                 dataVDom.Rows.Clear();
@@ -69,21 +67,21 @@ namespace ESshell
             }
             finally { }
         }
-        private void add_value()
+        private bool not_in(string domen,string val)
+        {
+            return parent.es.DomenVal.Where(e => e.Имя_домена == domen && e.Значение_домена == val).Count() == 0;
+        }
+        public static void add_value(frmMain parent,string name)
         {
             string vals =String.Join("; ", from domens in parent.es.DomenVal.AsEnumerable() 
-                       where domens.Field<string>("Имя_домена")==txtName.Text 
+                       where domens.Field<string>("Имя_домена")==name.Trim() 
                        select domens.Field<string>("Значение_домена"));
-            if (editrow>=0)
-                parent.es.Domens[editrow]["Имя_домена"] = txtName.Text;
-            parent.es.Domens.Select("Имя_домена =\'" + txtName.Text + "\'")[0]["Значения_домена"] = vals;
+            
+            parent.es.Domens.Select("Имя_домена =\'" + name.Trim() + "\'")[0]["Значения_домена"] = vals;
             
 
         }
-        private int reuse_domen()
-        {
-            return 1;
-        }
+        
         private bool empty_domen()
         {
             
@@ -107,6 +105,7 @@ namespace ESshell
             ESys.DomenValRow[] dr=parent.es.DomenVal.Where(e=>e.Имя_домена==editname).ToArray();
             foreach(ESys.DomenValRow row in dr)
                 parent.es.DomenVal.RemoveDomenValRow(row);
+            parent.es.Domens[editrow]["Имя_домена"] = txtName.Text.Trim();
         }
 
         private void frmAddDomen_Load(object sender, EventArgs e)

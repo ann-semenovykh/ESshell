@@ -144,6 +144,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmAddFact";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Факт";
             ((System.ComponentModel.ISupportInitialize)(this.eSys)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.variableBindingSource)).EndInit();

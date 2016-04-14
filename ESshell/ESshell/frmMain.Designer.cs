@@ -54,11 +54,14 @@
             this.косультацияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.цельКонсультацииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.начатьКонсультациюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bindRules = new System.Windows.Forms.BindingSource(this.components);
-            this.bindVars = new System.Windows.Forms.BindingSource(this.components);
-            this.bindDomen = new System.Windows.Forms.BindingSource(this.components);
-            this.bindDomenVal = new System.Windows.Forms.BindingSource(this.components);
+            this.компонентаОбъясненияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabRules = new System.Windows.Forms.TabPage();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.dataRules = new System.Windows.Forms.DataGridView();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnRuleDel = new System.Windows.Forms.Button();
+            this.btnRuleEdit = new System.Windows.Forms.Button();
+            this.btnRuleAdd = new System.Windows.Forms.Button();
             this.tabVars = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.dataVars = new System.Windows.Forms.DataGridView();
@@ -76,18 +79,18 @@
             this.btnDomenEdit = new System.Windows.Forms.Button();
             this.btnDomenAdd = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnRuleAdd = new System.Windows.Forms.Button();
-            this.btnRuleEdit = new System.Windows.Forms.Button();
-            this.btnRuleDel = new System.Windows.Forms.Button();
-            this.dataRules = new System.Windows.Forms.DataGridView();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.bindRules = new System.Windows.Forms.BindingSource(this.components);
+            this.bindVars = new System.Windows.Forms.BindingSource(this.components);
+            this.bindDomen = new System.Windows.Forms.BindingSource(this.components);
+            this.bindDomenVal = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindRules)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindVars)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindDomen)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindDomenVal)).BeginInit();
             this.tabRules.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataRules)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.tabVars.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -104,12 +107,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataDomenVal)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataRules)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
-            this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
-            this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindRules)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindVars)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindDomen)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindDomenVal)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -117,7 +118,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.файлToolStripMenuItem,
             this.базаЗнанийToolStripMenuItem,
-            this.косультацияToolStripMenuItem});
+            this.косультацияToolStripMenuItem,
+            this.компонентаОбъясненияToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(849, 24);
@@ -145,6 +147,7 @@
             this.создатьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.создатьToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.создатьToolStripMenuItem.Text = "Создать";
+            this.создатьToolStripMenuItem.Click += new System.EventHandler(this.создатьToolStripMenuItem_Click);
             // 
             // открытьToolStripMenuItem
             // 
@@ -214,18 +217,21 @@
             this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
             this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.добавитьToolStripMenuItem.Text = "Добавить";
+            this.добавитьToolStripMenuItem.Click += new System.EventHandler(this.добавитьToolStripMenuItem_Click);
             // 
             // изменитьToolStripMenuItem
             // 
             this.изменитьToolStripMenuItem.Name = "изменитьToolStripMenuItem";
             this.изменитьToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.изменитьToolStripMenuItem.Text = "Изменить";
+            this.изменитьToolStripMenuItem.Click += new System.EventHandler(this.изменитьToolStripMenuItem_Click);
             // 
             // удалитьToolStripMenuItem
             // 
             this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
             this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.удалитьToolStripMenuItem.Text = "Удалить";
+            this.удалитьToolStripMenuItem.Click += new System.EventHandler(this.удалитьToolStripMenuItem_Click);
             // 
             // доменыToolStripMenuItem
             // 
@@ -249,12 +255,14 @@
             this.изменитьToolStripMenuItem1.Name = "изменитьToolStripMenuItem1";
             this.изменитьToolStripMenuItem1.Size = new System.Drawing.Size(128, 22);
             this.изменитьToolStripMenuItem1.Text = "Изменить";
+            this.изменитьToolStripMenuItem1.Click += new System.EventHandler(this.изменитьToolStripMenuItem1_Click);
             // 
             // удалитьToolStripMenuItem1
             // 
             this.удалитьToolStripMenuItem1.Name = "удалитьToolStripMenuItem1";
             this.удалитьToolStripMenuItem1.Size = new System.Drawing.Size(128, 22);
             this.удалитьToolStripMenuItem1.Text = "Удалить";
+            this.удалитьToolStripMenuItem1.Click += new System.EventHandler(this.удалитьToolStripMenuItem1_Click);
             // 
             // переменныеToolStripMenuItem
             // 
@@ -272,18 +280,21 @@
             this.добавитьToolStripMenuItem2.Name = "добавитьToolStripMenuItem2";
             this.добавитьToolStripMenuItem2.Size = new System.Drawing.Size(128, 22);
             this.добавитьToolStripMenuItem2.Text = "Добавить";
+            this.добавитьToolStripMenuItem2.Click += new System.EventHandler(this.добавитьToolStripMenuItem2_Click);
             // 
             // изменитьToolStripMenuItem2
             // 
             this.изменитьToolStripMenuItem2.Name = "изменитьToolStripMenuItem2";
             this.изменитьToolStripMenuItem2.Size = new System.Drawing.Size(128, 22);
             this.изменитьToolStripMenuItem2.Text = "Изменить";
+            this.изменитьToolStripMenuItem2.Click += new System.EventHandler(this.изменитьToolStripMenuItem2_Click);
             // 
             // удалитьToolStripMenuItem2
             // 
             this.удалитьToolStripMenuItem2.Name = "удалитьToolStripMenuItem2";
             this.удалитьToolStripMenuItem2.Size = new System.Drawing.Size(128, 22);
             this.удалитьToolStripMenuItem2.Text = "Удалить";
+            this.удалитьToolStripMenuItem2.Click += new System.EventHandler(this.удалитьToolStripMenuItem2_Click);
             // 
             // косультацияToolStripMenuItem
             // 
@@ -297,19 +308,24 @@
             // цельКонсультацииToolStripMenuItem
             // 
             this.цельКонсультацииToolStripMenuItem.Name = "цельКонсультацииToolStripMenuItem";
-            this.цельКонсультацииToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.цельКонсультацииToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
+            this.цельКонсультацииToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.цельКонсультацииToolStripMenuItem.Text = "Назначить цель";
             this.цельКонсультацииToolStripMenuItem.Click += new System.EventHandler(this.цельКонсультацииToolStripMenuItem_Click);
             // 
             // начатьКонсультациюToolStripMenuItem
             // 
             this.начатьКонсультациюToolStripMenuItem.Name = "начатьКонсультациюToolStripMenuItem";
-            this.начатьКонсультациюToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.начатьКонсультациюToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.начатьКонсультациюToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.начатьКонсультациюToolStripMenuItem.Text = "Начать консультацию";
+            this.начатьКонсультациюToolStripMenuItem.Click += new System.EventHandler(this.начатьКонсультациюToolStripMenuItem_Click);
             // 
-            // bindDomen
+            // компонентаОбъясненияToolStripMenuItem
             // 
-            this.bindDomen.CurrentChanged += new System.EventHandler(this.bindDomen_CurrentChanged);
+            this.компонентаОбъясненияToolStripMenuItem.Name = "компонентаОбъясненияToolStripMenuItem";
+            this.компонентаОбъясненияToolStripMenuItem.Size = new System.Drawing.Size(156, 20);
+            this.компонентаОбъясненияToolStripMenuItem.Text = "Компонента объяснения";
             // 
             // tabRules
             // 
@@ -320,6 +336,85 @@
             this.tabRules.TabIndex = 2;
             this.tabRules.Text = "Правила";
             this.tabRules.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer3
+            // 
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.dataRules);
+            this.splitContainer3.Panel1.Padding = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.groupBox3);
+            this.splitContainer3.Size = new System.Drawing.Size(841, 500);
+            this.splitContainer3.SplitterDistance = 573;
+            this.splitContainer3.TabIndex = 0;
+            // 
+            // dataRules
+            // 
+            this.dataRules.AllowDrop = true;
+            this.dataRules.AllowUserToAddRows = false;
+            this.dataRules.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dataRules.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataRules.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataRules.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dataRules.Location = new System.Drawing.Point(3, 3);
+            this.dataRules.Name = "dataRules";
+            this.dataRules.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataRules.Size = new System.Drawing.Size(570, 494);
+            this.dataRules.TabIndex = 0;
+            this.dataRules.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataRules_DataError);
+            this.dataRules.DragDrop += new System.Windows.Forms.DragEventHandler(this.dataRules_DragDrop);
+            this.dataRules.DragOver += new System.Windows.Forms.DragEventHandler(this.dataRules_DragOver);
+            this.dataRules.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataRules_MouseDown);
+            this.dataRules.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dataRules_MouseMove);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnRuleDel);
+            this.groupBox3.Controls.Add(this.btnRuleEdit);
+            this.groupBox3.Controls.Add(this.btnRuleAdd);
+            this.groupBox3.Location = new System.Drawing.Point(40, 18);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(214, 133);
+            this.groupBox3.TabIndex = 1;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Действия";
+            // 
+            // btnRuleDel
+            // 
+            this.btnRuleDel.Location = new System.Drawing.Point(42, 87);
+            this.btnRuleDel.Name = "btnRuleDel";
+            this.btnRuleDel.Size = new System.Drawing.Size(137, 28);
+            this.btnRuleDel.TabIndex = 2;
+            this.btnRuleDel.Text = "Удалить";
+            this.btnRuleDel.UseVisualStyleBackColor = true;
+            this.btnRuleDel.Click += new System.EventHandler(this.btnRuleDel_Click);
+            // 
+            // btnRuleEdit
+            // 
+            this.btnRuleEdit.Location = new System.Drawing.Point(42, 53);
+            this.btnRuleEdit.Name = "btnRuleEdit";
+            this.btnRuleEdit.Size = new System.Drawing.Size(137, 28);
+            this.btnRuleEdit.TabIndex = 1;
+            this.btnRuleEdit.Text = "Изменить";
+            this.btnRuleEdit.UseVisualStyleBackColor = true;
+            this.btnRuleEdit.Click += new System.EventHandler(this.btnRuleEdit_Click);
+            // 
+            // btnRuleAdd
+            // 
+            this.btnRuleAdd.Location = new System.Drawing.Point(42, 19);
+            this.btnRuleAdd.Name = "btnRuleAdd";
+            this.btnRuleAdd.Size = new System.Drawing.Size(137, 28);
+            this.btnRuleAdd.TabIndex = 0;
+            this.btnRuleAdd.Text = "Добавить";
+            this.btnRuleAdd.UseVisualStyleBackColor = true;
+            this.btnRuleAdd.Click += new System.EventHandler(this.btnRuleAdd_Click);
             // 
             // tabVars
             // 
@@ -357,6 +452,7 @@
             this.dataVars.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataVars.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataVars.Location = new System.Drawing.Point(0, 0);
+            this.dataVars.MultiSelect = false;
             this.dataVars.Name = "dataVars";
             this.dataVars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataVars.Size = new System.Drawing.Size(570, 494);
@@ -451,10 +547,6 @@
             this.dataDomen.TabIndex = 0;
             this.dataDomen.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataDomen_CellContentClick);
             this.dataDomen.SelectionChanged += new System.EventHandler(this.dataDomen_SelectionChanged);
-            this.dataDomen.DragDrop += new System.Windows.Forms.DragEventHandler(this.dataDomen_DragDrop);
-            this.dataDomen.DragOver += new System.Windows.Forms.DragEventHandler(this.dataDomen_DragOver);
-            this.dataDomen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataDomen_MouseDown);
-            this.dataDomen.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dataDomen_MouseMove);
             // 
             // dataDomenVal
             // 
@@ -481,6 +573,7 @@
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Применить";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // groupBox1
             // 
@@ -493,6 +586,7 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Действия";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // btnDomenDel
             // 
@@ -536,79 +630,9 @@
             this.tabControl1.Size = new System.Drawing.Size(849, 526);
             this.tabControl1.TabIndex = 1;
             // 
-            // groupBox3
+            // bindDomen
             // 
-            this.groupBox3.Controls.Add(this.btnRuleDel);
-            this.groupBox3.Controls.Add(this.btnRuleEdit);
-            this.groupBox3.Controls.Add(this.btnRuleAdd);
-            this.groupBox3.Location = new System.Drawing.Point(40, 18);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(214, 133);
-            this.groupBox3.TabIndex = 1;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Действия";
-            // 
-            // btnRuleAdd
-            // 
-            this.btnRuleAdd.Location = new System.Drawing.Point(42, 19);
-            this.btnRuleAdd.Name = "btnRuleAdd";
-            this.btnRuleAdd.Size = new System.Drawing.Size(137, 28);
-            this.btnRuleAdd.TabIndex = 0;
-            this.btnRuleAdd.Text = "Добавить";
-            this.btnRuleAdd.UseVisualStyleBackColor = true;
-            this.btnRuleAdd.Click += new System.EventHandler(this.btnRuleAdd_Click);
-            // 
-            // btnRuleEdit
-            // 
-            this.btnRuleEdit.Location = new System.Drawing.Point(42, 53);
-            this.btnRuleEdit.Name = "btnRuleEdit";
-            this.btnRuleEdit.Size = new System.Drawing.Size(137, 28);
-            this.btnRuleEdit.TabIndex = 1;
-            this.btnRuleEdit.Text = "Изменить";
-            this.btnRuleEdit.UseVisualStyleBackColor = true;
-            this.btnRuleEdit.Click += new System.EventHandler(this.btnRuleEdit_Click);
-            // 
-            // btnRuleDel
-            // 
-            this.btnRuleDel.Location = new System.Drawing.Point(42, 87);
-            this.btnRuleDel.Name = "btnRuleDel";
-            this.btnRuleDel.Size = new System.Drawing.Size(137, 28);
-            this.btnRuleDel.TabIndex = 2;
-            this.btnRuleDel.Text = "Удалить";
-            this.btnRuleDel.UseVisualStyleBackColor = true;
-            this.btnRuleDel.Click += new System.EventHandler(this.btnRuleDel_Click);
-            // 
-            // dataRules
-            // 
-            this.dataRules.AllowUserToAddRows = false;
-            this.dataRules.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.dataRules.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataRules.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataRules.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataRules.Location = new System.Drawing.Point(3, 3);
-            this.dataRules.Name = "dataRules";
-            this.dataRules.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataRules.Size = new System.Drawing.Size(570, 494);
-            this.dataRules.TabIndex = 0;
-            this.dataRules.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataRules_DataError);
-            // 
-            // splitContainer3
-            // 
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer3.Name = "splitContainer3";
-            // 
-            // splitContainer3.Panel1
-            // 
-            this.splitContainer3.Panel1.Controls.Add(this.dataRules);
-            this.splitContainer3.Panel1.Padding = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            // 
-            // splitContainer3.Panel2
-            // 
-            this.splitContainer3.Panel2.Controls.Add(this.groupBox3);
-            this.splitContainer3.Size = new System.Drawing.Size(841, 500);
-            this.splitContainer3.SplitterDistance = 573;
-            this.splitContainer3.TabIndex = 0;
+            this.bindDomen.CurrentChanged += new System.EventHandler(this.bindDomen_CurrentChanged);
             // 
             // frmMain
             // 
@@ -618,15 +642,18 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.Name = "frmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Оболочка ЭС";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindRules)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindVars)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindDomen)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindDomenVal)).EndInit();
             this.tabRules.ResumeLayout(false);
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataRules)).EndInit();
+            this.groupBox3.ResumeLayout(false);
             this.tabVars.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
@@ -643,12 +670,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataDomenVal)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataRules)).EndInit();
-            this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
-            this.splitContainer3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bindRules)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindVars)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindDomen)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindDomenVal)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -709,6 +734,7 @@
         private System.Windows.Forms.Button btnRuleDel;
         private System.Windows.Forms.Button btnRuleEdit;
         private System.Windows.Forms.Button btnRuleAdd;
+        private System.Windows.Forms.ToolStripMenuItem компонентаОбъясненияToolStripMenuItem;
     }
 }
 

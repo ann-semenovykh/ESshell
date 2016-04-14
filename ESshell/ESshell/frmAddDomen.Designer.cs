@@ -103,6 +103,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmAddDomen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Домен";
             this.Load += new System.EventHandler(this.frmAddDomen_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataVDom)).EndInit();
