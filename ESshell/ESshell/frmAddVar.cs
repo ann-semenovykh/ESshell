@@ -119,6 +119,7 @@ namespace ESshell
                         txtQuest.Clear();
                         cmbDomen.SelectedIndex = cmbType.SelectedIndex = 0;
                         txtName.Focus();
+                        parent.dataVars.Rows[parent.dataVars.Rows.Count - 1].Selected = true;
                     }
                     else
                     this.Close();

@@ -60,7 +60,7 @@
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 1;
-            this.btnOk.Text = "Ответить";
+            this.btnOk.Text = "Применить";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
@@ -89,9 +89,9 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtQuestion;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.BindingSource bindAnswer;
         public System.Windows.Forms.ComboBox cmbAnswer;
+        public System.Windows.Forms.TextBox txtQuestion;
     }
 }

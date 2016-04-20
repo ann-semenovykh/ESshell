@@ -98,6 +98,7 @@ namespace ESshell
                     rule.Посылка = left;
                     if (editrow >= 0)
                         this.Close();
+                    else parent.dataRules.Rows[parent.dataRules.Rows.Count - 1].Selected = true;
 
                     dataLSide.Rows.Clear();
                     dataRSide.Rows.Clear();

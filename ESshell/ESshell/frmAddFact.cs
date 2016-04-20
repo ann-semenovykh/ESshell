@@ -36,7 +36,7 @@ namespace ESshell
                 btnSave.Text = "Изменить";
             }
         }
-
+        
         private void btnSave_Click(object sender, EventArgs e)
         {
             DataRowView tmp = cmbVar.SelectedItem as DataRowView;
@@ -81,6 +81,13 @@ namespace ESshell
                 MessageBox.Show("Переменные не добавлены\nНельзя добавить факт", "Ошибка");
                 this.Close();
             }
+        }
+
+        private void btnAddVar_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            parent.add_var();
+            this.Show();
         }
     }
 }

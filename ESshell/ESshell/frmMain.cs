@@ -17,6 +17,7 @@ namespace ESshell
     {
         public ESys es = new ESys();
         public string goal;
+        public TreeNode tree;
         public frmMain()
         {
             InitializeComponent();
@@ -60,7 +61,7 @@ namespace ESshell
 
         private void переменныеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            tabControl1.SelectedIndex = 1;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -292,17 +293,24 @@ namespace ESshell
                 // If the mouse moves outside the rectangle, start the drag.
                 if (dragBoxFromMouseDownVal != Rectangle.Empty &&
                     !dragBoxFromMouseDownVal.Contains(e.X, e.Y))
-                {
-
-                    // Proceed with the drag and drop, passing in the list item.                   
-                    DragDropEffects dropEffect = dataDomenVal.DoDragDrop(
+                { // Proceed with the drag and drop, passing in the list item.                   
+                    DragDropEffects dropEffect;
+                    try
+                    {
+                        dropEffect = dataDomenVal.DoDragDrop(
                              dataDomenVal.Rows[rowIndexFromMouseDownVal],
                              DragDropEffects.Move);
+                    }
+                    catch
+                    {
+
+                    }
                 }
             }
         }
         private ESys.DomenValRow get_domenval(int indexingrid)
         {
+            indexingrid = indexingrid < 0 ? 0 : indexingrid;
             string val = dataDomenVal.Rows[indexingrid].Cells[1].Value.ToString(); //value of domenval
             return es.DomenVal.Where(ex => ex.Имя_домена == dataDomen.SelectedRows[0].Cells[0].Value.ToString() && ex.Значение_домена == val).First();
             ;
@@ -376,7 +384,7 @@ namespace ESshell
 
             }
         }
-        private void add_var()
+        public void add_var()
         {
             frmAddVar frm = new frmAddVar(this, null, -1);
             frm.ShowDialog(this);
@@ -409,11 +417,13 @@ namespace ESshell
         private void btnVarAdd_Click(object sender, EventArgs e)
         {
             add_var();
+            btnSaveVar.Visible = false;
         }
 
         private void btnVarEdit_Click(object sender, EventArgs e)
         {
             edit_var();
+            btnSaveVar.Visible = false;
         }
 
         private void сохранитьКакToolStripMenuItem_Click(object sender, EventArgs e)
@@ -573,6 +583,9 @@ namespace ESshell
             frmConsult frm = new frmConsult(es, goal);
             
              frm.ShowDialog();
+            TreeNode tmp=new TreeNode();
+            tree = null;   
+            tree  = (TreeNode)frm.currentnode.Clone();
             
         }
 
@@ -679,6 +692,60 @@ namespace ESshell
                 es.Clear();
                 filename = "";
             }
+        }
+
+        private void компонентаОбъясненияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmExplain frm = new frmExplain(tree,this);
+            frm.ShowDialog();
+        }
+
+        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult dialog = MessageBox.Show("Сохранить изменения в экпертной системе?", "Внимание", MessageBoxButtons.YesNoCancel);
+            if (dialog == DialogResult.Yes)
+                сохранитьToolStripMenuItem_Click(sender, e);
+            if (dialog != DialogResult.Cancel)
+                this.Close();
+            
+        }
+
+        private void правилаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 2;
+        }
+
+        private void доменыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 0;
+        }
+
+        private void dataVars_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataVars.SelectedRows.Count>0)
+            {
+                txtQuest.Text = dataVars.SelectedRows[0].Cells[3].Value.ToString();
+                cmbType.SelectedIndex=cmbType.FindString(dataVars.SelectedRows[0].Cells[1].Value.ToString());
+                btnSaveVar.Visible = false;
+            }
+        }
+
+        private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnSaveVar.Visible = true;
+        }
+
+        private void txtQuest_TextChanged(object sender, EventArgs e)
+        {
+            btnSaveVar.Visible = true;
+        }
+
+        private void btnSaveVar_Click(object sender, EventArgs e)
+        {
+            ESys.VariableRow row = es.Variable.FindByИмя(dataVars.SelectedRows[0].Cells[0].Value.ToString());
+            row.Тип = cmbType.SelectedItem.ToString();
+            row.Вопрос = txtQuest.Text;
+            btnSaveVar.Visible = false;
         }
 
 

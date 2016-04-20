@@ -17,12 +17,15 @@ namespace ESshell
         {
             InitializeComponent();
             parent = par;
-            bindGoal.DataSource = parent.es.Variable.Where(e => e.Тип == "Выводимая");
-            cmbGoal.DataSource = bindGoal;
-            cmbGoal.DisplayMember = "Имя";
-            cmbGoal.ValueMember = "Имя";
-            if (parent.goal != null)
-                cmbGoal.SelectedIndex = cmbGoal.FindString(parent.goal);
+            if (parent.es.Variable.Where(e => e.Тип == "Выводимая").Count() > 0)
+            {
+                bindGoal.DataSource = parent.es.Variable.Where(e => e.Тип == "Выводимая");
+                cmbGoal.DataSource = bindGoal;
+                cmbGoal.DisplayMember = "Имя";
+                cmbGoal.ValueMember = "Имя";
+                if (parent.goal != null)
+                    cmbGoal.SelectedIndex = cmbGoal.FindString(parent.goal);
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -43,6 +46,9 @@ namespace ESshell
             {
                 MessageBox.Show("Доступных переменных не найдено", "Ошибка");
                 this.Close();
+            }
+            else
+            {
             }
         }
     }

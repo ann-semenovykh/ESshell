@@ -39,6 +39,7 @@
             this.eSys = new ESshell.ESys();
             this.variableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.domenValBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.btnAddVar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.eSys)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.variableBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.domenValBindingSource)).BeginInit();
@@ -127,6 +128,16 @@
             this.domenValBindingSource.DataMember = "DomenVal";
             this.domenValBindingSource.DataSource = this.eSys;
             // 
+            // btnAddVar
+            // 
+            this.btnAddVar.Location = new System.Drawing.Point(28, 32);
+            this.btnAddVar.Name = "btnAddVar";
+            this.btnAddVar.Size = new System.Drawing.Size(21, 22);
+            this.btnAddVar.TabIndex = 19;
+            this.btnAddVar.Text = "+";
+            this.btnAddVar.UseVisualStyleBackColor = true;
+            this.btnAddVar.Click += new System.EventHandler(this.btnAddVar_Click);
+            // 
             // frmAddFact
             // 
             this.AcceptButton = this.btnSave;
@@ -134,6 +145,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(491, 107);
+            this.Controls.Add(this.btnAddVar);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -167,5 +179,6 @@
         private System.Windows.Forms.BindingSource variableBindingSource;
         private ESys eSys;
         private System.Windows.Forms.BindingSource domenValBindingSource;
+        private System.Windows.Forms.Button btnAddVar;
     }
 }

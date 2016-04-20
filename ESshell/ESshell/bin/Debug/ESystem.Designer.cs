@@ -450,6 +450,13 @@ namespace ESshell {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_Rules_WorkMemory", new global::System.Data.DataColumn[] {
+                        this.tableRules.ИмяColumn}, new global::System.Data.DataColumn[] {
+                        this.tableWorkMemory.ruleColumn});
+            this.tableWorkMemory.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.Cascade;
+            fkc.UpdateRule = global::System.Data.Rule.Cascade;
             fkc = new global::System.Data.ForeignKeyConstraint("Fact_WorkMemory", new global::System.Data.DataColumn[] {
                         this.tableFact.idColumn}, new global::System.Data.DataColumn[] {
                         this.tableWorkMemory.factColumn});
@@ -2529,7 +2536,7 @@ namespace ESshell {
             
             private global::System.Data.DataColumn columnfact;
             
-            private global::System.Data.DataColumn columnstatus;
+            private global::System.Data.DataColumn columnrule;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -2574,9 +2581,9 @@ namespace ESshell {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn statusColumn {
+            public global::System.Data.DataColumn ruleColumn {
                 get {
-                    return this.columnstatus;
+                    return this.columnrule;
                 }
             }
             
@@ -2617,11 +2624,11 @@ namespace ESshell {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public WorkMemoryRow AddWorkMemoryRow(int fact, string status) {
+            public WorkMemoryRow AddWorkMemoryRow(int fact, string rule) {
                 WorkMemoryRow rowWorkMemoryRow = ((WorkMemoryRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         fact,
-                        status};
+                        rule};
                 rowWorkMemoryRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowWorkMemoryRow);
                 return rowWorkMemoryRow;
@@ -2645,7 +2652,7 @@ namespace ESshell {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
                 this.columnfact = base.Columns["fact"];
-                this.columnstatus = base.Columns["status"];
+                this.columnrule = base.Columns["rule"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2653,8 +2660,8 @@ namespace ESshell {
             private void InitClass() {
                 this.columnfact = new global::System.Data.DataColumn("fact", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfact);
-                this.columnstatus = new global::System.Data.DataColumn("status", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnstatus);
+                this.columnrule = new global::System.Data.DataColumn("rule", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnrule);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3584,17 +3591,17 @@ namespace ESshell {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string status {
+            public string rule {
                 get {
                     try {
-                        return ((string)(this[this.tableWorkMemory.statusColumn]));
+                        return ((string)(this[this.tableWorkMemory.ruleColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'status\' in table \'WorkMemory\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'rule\' in table \'WorkMemory\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableWorkMemory.statusColumn] = value;
+                    this[this.tableWorkMemory.ruleColumn] = value;
                 }
             }
             
@@ -3612,14 +3619,14 @@ namespace ESshell {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsstatusNull() {
-                return this.IsNull(this.tableWorkMemory.statusColumn);
+            public bool IsruleNull() {
+                return this.IsNull(this.tableWorkMemory.ruleColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetstatusNull() {
-                this[this.tableWorkMemory.statusColumn] = global::System.Convert.DBNull;
+            public void SetruleNull() {
+                this[this.tableWorkMemory.ruleColumn] = global::System.Convert.DBNull;
             }
         }
         

@@ -18,8 +18,10 @@ namespace ESshell
         string maingoal;
         string currentvariable;
         string savedquest;
-        
-        bool remember_askable = false;
+        public TreeNode currentnode;
+
+        private Thread cycle;
+        private ManualResetEvent clickEvent = new ManualResetEvent(false);
         public frmConsult(ESys exsys,string g)
         {
             InitializeComponent();
@@ -28,29 +30,49 @@ namespace ESshell
             es.ConflictSet.Clear();
             es.WorkMemory.Clear();
             maingoal = g;
-            
+            currentnode = new TreeNode("Цель консультации: "+g);
         }
 
         private void frmConsult_Load(object sender, EventArgs e)
         {
-            string tmp;
-            List<string> conflictset = new List<string>();
-            add_rules_to_conflictset(conflictset, maingoal);
-            int i = 0;
-            int check;
-            while (i < conflictset.Count())              //choose first rule
-            {
-                check = check_lside(conflictset[i]);
-                if (check == 1)
-                    break;
-                else remember_askable = remember_askable || (check == -1);
-                if (remember_askable)
-                    break;
+            //string tmp;
+            //List<string> conflictset = new List<string>();
+            //add_rules_to_conflictset(conflictset, maingoal);
+            //int i = 0;
+            //int check;
+            //while (i < conflictset.Count())              //choose first rule
+            //{
+            //    check = check_lside(conflictset[0],null);
+            //    if (check == 1)
+            //        break;
+            //    else remember_askable = remember_askable || (check == -1);
+            //    if (remember_askable)
+            //        break;
 
-                i++;
-            } 
-            display_values();
-            cmbAnswer.Focus();
+            //    i++;
+            //} 
+            //display_values();
+           // cmbAnswer.Focus();
+            cycle = new Thread(new ThreadStart(start));  // порождаем поток цикла
+            cycle.Start();
+        }
+        private void start()
+        {
+                string message = "";
+                string tmp;
+                run(maingoal, out tmp, currentnode);
+                int status = run(maingoal, out tmp, currentnode);
+                if (status == 0)
+                {
+                    message = "Значение ";
+                    tmp = "найти не удалось";
+                }
+                if (tmp != null)
+                {
+                    MessageBox.Show(message + maingoal + " " + tmp, "Результат");
+                    this.BeginInvoke((MethodInvoker)(() => this.Close()));
+                }
+            
         }
         private string in_workmemory(string name)
         {
@@ -75,40 +97,49 @@ namespace ESshell
                  where lside.Имя==rule
                  select fact).ToArray();
         }
-        int check_variable(string variable,string value)        //0-false/1-true/-1-unknown for askable
+        int check_variable(string variable,string value,TreeNode tn)        //0-false/1-true/-1-unknown for askable
         {
             string found_value;
             int status;
             switch (es.Variable.FindByИмя(variable).Тип)
             {
                 case "Выводимая":
-                    status=run(variable,out found_value);        //add to stack
-                    if (status == -1)
-                        return status;
+                    status=run(variable,out found_value,tn);        //add to stack
                     if (found_value == null)            //не удалось вывести переменную
                         return 0;
                     else return Convert.ToInt32(found_value == value);
                 case "Выводимо-запрашиваемая":
-                    status=run(variable,out found_value);        //add to stack
-                    if (status == -1)
-                        return status;
+                    status=run(variable,out found_value,tn);        //add to stack
                     if (found_value == null)            //не удалось вывести переменную
                         goto case "Запрашиваемая";
                     else return Convert.ToInt32(found_value == value);
                 case "Запрашиваемая":
-                    if (!remember_askable)
-                    {
-                        bindAnswer.DataSource = es.DomenVal.Where(e => e.Имя_домена == es.Variable.FindByИмя(variable).Домен);
-                        cmbAnswer.DisplayMember = "Значение_домена";
+                    
+                    ((Form)this).Invoke((Action)(() =>
+                        {
+                            bindAnswer.DataSource = es.DomenVal.Where(e => e.Имя_домена == es.Variable.FindByИмя(variable).Домен);
+                            this.cmbAnswer.DisplayMember = "Значение_домена";
 
-                        savedquest = es.Variable.FindByИмя(variable).Вопрос == String.Empty ? variable + "?" : es.Variable.FindByИмя(variable).Вопрос;
-                        currentvariable = variable;
-                       
-                    } return -1;
+                            savedquest = es.Variable.FindByИмя(variable).Вопрос == String.Empty ? variable + "?" : es.Variable.FindByИмя(variable).Вопрос;
+                            currentvariable = variable;
+
+                            this.cmbAnswer.DataSource = bindAnswer;
+                            this.txtQuestion.Text = savedquest;
+                            this.cmbAnswer.SelectedIndex = 0;
+                        }));
+                        clickEvent.Reset();
+                        clickEvent.WaitOne();   //ждем сигнала
+                        
+                        DataRow row=null;
+                        ((Form)this).Invoke((Action)(() =>
+                        { row = cmbAnswer.SelectedItem as DataRow; 
+                        add_to_workmemory(currentvariable, row[1].ToString(),tn.Text);
+                        }));
+                     return Convert.ToInt32(row[1].ToString() == value); 
                 default: return -2;
             }
         }
-        int check_lside(string rule)
+        int check_lside(string rule,TreeNode tn)
         {
             int correct;
             string value;
@@ -126,7 +157,7 @@ namespace ESshell
                     else return 0;
                 else
                 {
-                    correct = check_variable(facts[i].Переменная, facts[i].Значение_переменной);
+                    correct = check_variable(facts[i].Переменная, facts[i].Значение_переменной,tn);
                     if (correct == 1)
                     {
                         i++;
@@ -137,7 +168,13 @@ namespace ESshell
             }
             return 1;
         }
-        int run(string goal,out string value)
+        void add_child(TreeNode parent,TreeNode child)
+        {
+            ESys.RulesRow rule =es.Rules.FindByИмя(child.Text);
+            child.Text = rule[0].ToString()+": " + rule[1] + rule[2];
+            parent.Nodes.Add(child);
+        }
+        int run(string goal,out string value,TreeNode current)
         {
             value=in_workmemory(goal);
             if (value == null)          //variable in workmemory
@@ -146,29 +183,30 @@ namespace ESshell
                 add_rules_to_conflictset(conflictset, goal);
                 int i=0;
                 int check;
+                TreeNode tn = new TreeNode();
                 while (i < conflictset.Count())              //choose first rule
                 {
-                    check=check_lside(conflictset[i]);
+                    tn.Text = conflictset[i];
+                    
+                    check=check_lside(conflictset[i],tn);
                     if (check == 1)
                         break;
-                    else remember_askable =remember_askable || (check == -1);
                     
                     i++;
                 }
                 if (i < conflictset.Count())
                 {
+                    tn.Tag = conflictset[i];
+                    add_child(current, tn);
                     value = rule_works(conflictset[i], goal);
                     return 1;
                 }
                 else
-                    if (remember_askable)
-                        return -1;
-                    else 
-                        return 0;
+                    return 0;
             }
             else return 1;                                      //variable not in workmemory
         }
-        void add_to_workmemory(string variable,string value)
+        void add_to_workmemory(string variable,string value,string rule)
         {
 
             ESys.FactRow fact = null;
@@ -182,11 +220,12 @@ namespace ESshell
             }
             finally
             {
-                es.WorkMemory.AddWorkMemoryRow(fact.id, "");
+                es.WorkMemory.AddWorkMemoryRow(fact.id, rule);
             }
         }
         string rule_works(string rule,string goal)
         {
+            
             string found=null;
             ESys.FactRow[] facts=
                 (from fact in es.Fact
@@ -196,7 +235,7 @@ namespace ESshell
                  select fact).ToArray();
             foreach (ESys.FactRow fact in facts)
             {
-                es.WorkMemory.AddWorkMemoryRow(fact.id, "worked");
+                es.WorkMemory.AddWorkMemoryRow(fact.id, rule);
                 if (fact.Переменная == goal)
                     found = fact.Значение_переменной;
             }
@@ -204,14 +243,6 @@ namespace ESshell
         }
         void add_rules_to_conflictset(List<string> conflictset,string goal)
         {
-            //int[] facts=                                //факты, в выводе которых содержится цель
-            //    (from fact in es.Fact
-            //         join rside in es.RSide
-            //         on fact.id equals rside.Fact
-            //         where fact.Переменная==goal
-            //         select fact.id
-            //        ).ToArray();
-
             string[] rules=                             //правила, в посылках которых содержится цель
                 (from rule in es.Rules
                  join rside in es.RSide
@@ -226,35 +257,15 @@ namespace ESshell
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            string message="";
-            DataRow row = cmbAnswer.SelectedItem as DataRow;
-            add_to_workmemory(currentvariable, row[1].ToString());
-            string tmp;
-            remember_askable = false;
-            int status=run(maingoal,out tmp);
-            if (status == 0)
-            {
-                message = "Значение ";
-                tmp = "найти не удалось";
-            }
-            if (tmp != null)
-            {
-                MessageBox.Show(message + maingoal + " " + tmp, "Результат");
-                this.Close();
-            }
-            else
-                display_values();
-            
+            clickEvent.Set(); 
         }
         private void display_values()
         {
-            cmbAnswer.DataSource = bindAnswer;
-            cmbAnswer.SelectedIndex = 0;
-            txtQuestion.Text = savedquest;
+            
         }
         private void frmConsult_FormClosed(object sender, FormClosedEventArgs e)
         {
-
+            cycle.Abort();
         }
 
         private void frmConsult_Activated(object sender, EventArgs e)
@@ -265,11 +276,8 @@ namespace ESshell
 
         private void frmConsult_Shown(object sender, EventArgs e)
         {
-            if (cmbAnswer.Items.Count == 0)
-            {
-                MessageBox.Show("Для определения цели не заданы правила");
-                this.Close();
-            }
+            
+
         }
     }
 }

@@ -57,6 +57,7 @@ namespace ESshell
                 dataVDom.Rows.Clear();
                 txtName.Clear();
                 txtName.Focus();
+                parent.dataDomen.Rows[parent.dataDomen.Rows.Count-1].Selected = true;
             }
             else this.Close();
             }
