@@ -33,7 +33,7 @@ namespace ESshell
             {
                 cmbVar.SelectedIndex = cmbVar.FindString(datagr.Rows[edit].Cells[0].Value.ToString());
                 cmbVal.SelectedIndex = cmbVal.FindString(datagr.Rows[edit].Cells[1].Value.ToString());
-                btnSave.Text = "Изменить";
+                btnSave.Text = "Применить";
             }
         }
         
@@ -88,6 +88,11 @@ namespace ESshell
             this.Hide();
             parent.add_var();
             this.Show();
+        }
+
+        private void frmAddFact_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

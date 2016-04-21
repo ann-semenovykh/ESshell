@@ -129,7 +129,7 @@ namespace ESshell
                 if (!check_dom_in_rule(dataDomen.SelectedRows[0].Cells[0].Value.ToString()))
                 {
                     MessageBox.Show("Функциональность ограничена\nЗначения домена уже используются в правилах\nИзменение значений запрещено", "Внимание");
-                    frm.dataVDom.Enabled = false;
+                    frm.dataVDom.AllowUserToAddRows = false;
                 }
 
                 frm.ShowDialog(this);
@@ -285,6 +285,7 @@ namespace ESshell
         }
         private Rectangle dragBoxFromMouseDownVal;
         private int rowIndexFromMouseDownVal;
+        private int indexingrid;
         private int rowIndexOfItemUnderMouseToDropVal;
         private void dataDomenVal_MouseMove(object sender, MouseEventArgs e)
         {
@@ -295,22 +296,23 @@ namespace ESshell
                     !dragBoxFromMouseDownVal.Contains(e.X, e.Y))
                 { // Proceed with the drag and drop, passing in the list item.                   
                     DragDropEffects dropEffect;
-                    try
+                   // try
                     {
                         dropEffect = dataDomenVal.DoDragDrop(
-                             dataDomenVal.Rows[rowIndexFromMouseDownVal],
+                             dataDomenVal.Rows[indexingrid],
                              DragDropEffects.Move);
                     }
-                    catch
-                    {
-
-                    }
+                    //catch
+                    //{
+                       
+                    //}
                 }
             }
         }
         private ESys.DomenValRow get_domenval(int indexingrid)
         {
-            indexingrid = indexingrid < 0 ? 0 : indexingrid;
+            if (indexingrid < 0)
+                return null;
             string val = dataDomenVal.Rows[indexingrid].Cells[1].Value.ToString(); //value of domenval
             return es.DomenVal.Where(ex => ex.Имя_домена == dataDomen.SelectedRows[0].Cells[0].Value.ToString() && ex.Значение_домена == val).First();
             ;
@@ -319,7 +321,7 @@ namespace ESshell
         {
             // Get the index of the item the mouse is below.
             rowIndexFromMouseDownVal = es.DomenVal.Rows.IndexOf(get_domenval(dataDomenVal.HitTest(e.X, e.Y).RowIndex));
-
+            indexingrid = dataDomenVal.HitTest(e.X, e.Y).RowIndex;
             if (rowIndexFromMouseDownVal != -1)
             {
                 // Remember the point where the mouse down occurred. 
@@ -359,9 +361,9 @@ namespace ESshell
                 DataGridViewRow row = e.Data.GetData(
                              typeof(DataGridViewRow)) as DataGridViewRow;
                 ESys.DomenValRow rowToMove = es.DomenVal.NewDomenValRow();
-                rowToMove.ItemArray = es.DomenVal[row.Index].ItemArray;
+                rowToMove.ItemArray = get_domenval(row.Index).ItemArray;
 
-                if (row.Index < 0)
+                if (row.Index < 0 || rowIndexOfItemUnderMouseToDropVal<0)
                 {
                     return;
                 }
@@ -485,6 +487,7 @@ namespace ESshell
         {
             frmAddRule frm = new frmAddRule(this,null,-1);
             frm.ShowDialog();
+            
         }
         void edit_rule()
         {
@@ -659,6 +662,8 @@ namespace ESshell
                 {
                     return;
                 }
+                if (rowIndexOfItemUnderMouseToDropRule < 0)
+                    rowIndexOfItemUnderMouseToDropRule = 0;
                 if (rowIndexFromMouseDownRule < rowIndexOfItemUnderMouseToDropRule)
                 {
                     
@@ -696,8 +701,13 @@ namespace ESshell
 
         private void компонентаОбъясненияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmExplain frm = new frmExplain(tree,this);
-            frm.ShowDialog();
+
+            if (tree != null)
+            {
+                frmExplain frm = new frmExplain(tree, this);
+                frm.ShowDialog();
+            }
+            else MessageBox.Show("Необходимо провести консультацию");
         }
 
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)

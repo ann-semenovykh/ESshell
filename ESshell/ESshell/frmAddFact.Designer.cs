@@ -52,7 +52,7 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(110, 33);
             this.btnCancel.TabIndex = 3;
-            this.btnCancel.Text = "Отмена";
+            this.btnCancel.Text = "Отменить";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
@@ -158,6 +158,7 @@
             this.Name = "frmAddFact";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Факт";
+            this.Load += new System.EventHandler(this.frmAddFact_Load);
             this.Shown += new System.EventHandler(this.frmAddFact_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.eSys)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.variableBindingSource)).EndInit();

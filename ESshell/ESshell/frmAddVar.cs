@@ -29,7 +29,7 @@ namespace ESshell
         }
         public void Load_value(frmMain par, ESys.VariableRow row)
         {
-            btnSave.Text = "Изменить";
+            btnSave.Text = "Применить";
             txtName.Text = editname = row.Имя;
             cmbDomen.SelectedIndex = cmbDomen.Items.IndexOf(row.Домен);
             cmbType.SelectedIndex = cmbType.Items.IndexOf(row.Тип);
@@ -87,7 +87,7 @@ namespace ESshell
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtName.Text.Trim() == "")
+            if (txtName.Text.Replace(" ","").ToUpper() == "")
             {
                 MessageBox.Show("Введите имя переменной");
                 txtName.Focus();
@@ -110,9 +110,12 @@ namespace ESshell
                         else return;
                     else
                         if (check_use("", cmbDomen.SelectedItem.ToString()))
-                            parent.es.Variable.AddVariableRow(txtName.Text.Trim(), cmbType.SelectedItem.ToString(),
-                                cmbDomen.SelectedItem.ToString(), txtQuest.Text.Trim());
+                            if (parent.es.Variable.Where(ex => ex.Имя.Replace(" ", "").ToUpper() == txtName.Text.Replace(" ", "").ToUpper()).Count() == 0)
+                                parent.es.Variable.AddVariableRow(txtName.Text.Trim(), cmbType.SelectedItem.ToString(),
+                                    cmbDomen.SelectedItem.ToString(), txtQuest.Text.Trim());
+                            else throw new System.Data.ConstraintException("Переменная с таким именем уже существует");
                         else return;
+                    parent.dataVars.FirstDisplayedScrollingRowIndex = parent.dataVars.Rows.Count - 1;
                     if (editrow<0)
                     {
                         txtName.Clear();
@@ -120,6 +123,7 @@ namespace ESshell
                         cmbDomen.SelectedIndex = cmbType.SelectedIndex = 0;
                         txtName.Focus();
                         parent.dataVars.Rows[parent.dataVars.Rows.Count - 1].Selected = true;
+                        this.Close();
                     }
                     else
                     this.Close();

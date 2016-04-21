@@ -55,14 +55,21 @@
             // 
             // dataVDom
             // 
+            this.dataVDom.AllowDrop = true;
             this.dataVDom.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataVDom.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataVDom.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DValue});
             this.dataVDom.Location = new System.Drawing.Point(22, 61);
+            this.dataVDom.MultiSelect = false;
             this.dataVDom.Name = "dataVDom";
+            this.dataVDom.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataVDom.Size = new System.Drawing.Size(240, 150);
             this.dataVDom.TabIndex = 2;
+            this.dataVDom.DragDrop += new System.Windows.Forms.DragEventHandler(this.dataVDom_DragDrop);
+            this.dataVDom.DragOver += new System.Windows.Forms.DragEventHandler(this.dataVDom_DragOver);
+            this.dataVDom.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataVDom_MouseDown);
+            this.dataVDom.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dataVDom_MouseMove);
             // 
             // DValue
             // 
@@ -86,7 +93,7 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(110, 33);
             this.btnCancel.TabIndex = 4;
-            this.btnCancel.Text = "Отмена";
+            this.btnCancel.Text = "Отменить";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // frmAddDomen

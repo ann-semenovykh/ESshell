@@ -173,6 +173,7 @@ namespace ESshell
             ESys.RulesRow rule =es.Rules.FindByИмя(child.Text);
             child.Text = rule[0].ToString()+": " + rule[1] + rule[2];
             parent.Nodes.Add(child);
+
         }
         int run(string goal,out string value,TreeNode current)
         {

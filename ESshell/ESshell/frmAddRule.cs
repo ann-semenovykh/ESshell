@@ -29,7 +29,6 @@ namespace ESshell
         void prepare_edit(ESys.RulesRow row)
         {
             editname = row.Имя;
-            btnSave.Text = "Изменить";
             txtName.Text = row.Имя;
             IEnumerable<ESys.FactRow> facts =
                 from fact in parent.es.Fact
@@ -61,7 +60,7 @@ namespace ESshell
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtName.Text.Trim() == "")
+            if (txtName.Text.Replace(" ","") == "")
             { MessageBox.Show("Введите имя правила"); txtName.Focus(); }
             else
             if (dataRSide.RowCount == 0 || dataLSide.RowCount == 0)
@@ -71,12 +70,15 @@ namespace ESshell
                 try
                 {
                     ESys.RulesRow rule;
-                    if (editrow<0)
-                     rule= parent.es.Rules.AddRulesRow(txtName.Text.Trim(), "", "");
-                    else {
+                    if (editrow < 0)
+                        if (parent.es.Rules.Where(ex => ex.Имя.ToUpper().Replace(" ", "") == txtName.Text.Replace(" ", "").ToUpper()).Count() == 0)
+                            rule = parent.es.Rules.AddRulesRow(txtName.Text.Trim(), "", "");
+                        else throw new System.Data.ConstraintException("Правило с таким именем уже существует");
+                    else
+                    {
                         rule = parent.es.Rules[editrow];
                         rule.Имя = txtName.Text.Trim();
-                        prepare_edit(parent.es,editname);
+                        prepare_edit(parent.es, editname);
                     }
                     add_to_set(dataLSide, true);
                     add_to_set(dataRSide, false);
@@ -99,7 +101,8 @@ namespace ESshell
                     if (editrow >= 0)
                         this.Close();
                     else parent.dataRules.Rows[parent.dataRules.Rows.Count - 1].Selected = true;
-
+                    parent.dataRules.FirstDisplayedScrollingRowIndex = parent.dataRules.Rows.Count - 1;
+                    this.Close();
                     dataLSide.Rows.Clear();
                     dataRSide.Rows.Clear();
                     txtName.Text = "";

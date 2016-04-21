@@ -31,13 +31,13 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpRules = new System.Windows.Forms.TabPage();
-            this.btnOK = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeRules = new System.Windows.Forms.TreeView();
             this.dataVarVal = new System.Windows.Forms.DataGridView();
-            this.bindVarVal = new System.Windows.Forms.BindingSource(this.components);
             this.Var = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Val = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnOK = new System.Windows.Forms.Button();
+            this.bindVarVal = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.tpRules.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -71,16 +71,6 @@
             this.tpRules.Text = "Сработавшие правила";
             this.tpRules.UseVisualStyleBackColor = true;
             // 
-            // btnOK
-            // 
-            this.btnOK.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnOK.Location = new System.Drawing.Point(219, 409);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 1;
-            this.btnOK.Text = "OK";
-            this.btnOK.UseVisualStyleBackColor = true;
-            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -101,6 +91,7 @@
             // treeRules
             // 
             this.treeRules.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeRules.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.treeRules.Location = new System.Drawing.Point(0, 0);
             this.treeRules.Name = "treeRules";
             this.treeRules.Size = new System.Drawing.Size(315, 371);
@@ -138,6 +129,16 @@
             this.Val.Name = "Val";
             this.Val.ReadOnly = true;
             this.Val.Width = 132;
+            // 
+            // btnOK
+            // 
+            this.btnOK.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnOK.Location = new System.Drawing.Point(219, 409);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(75, 23);
+            this.btnOK.TabIndex = 1;
+            this.btnOK.Text = "OK";
+            this.btnOK.UseVisualStyleBackColor = true;
             // 
             // frmExplain
             // 
