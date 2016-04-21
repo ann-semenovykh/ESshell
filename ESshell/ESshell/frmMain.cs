@@ -449,6 +449,7 @@ namespace ESshell
             {
                 try
                 {
+                    es.Clear();
                     es.ReadXml(of.FileName, XmlReadMode.IgnoreSchema);
                     filename = of.FileName;
                 }
