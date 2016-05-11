@@ -72,7 +72,15 @@ namespace ESshell
                     ESys.RulesRow rule;
                     if (editrow < 0)
                         if (parent.es.Rules.Where(ex => ex.Имя.ToUpper().Replace(" ", "") == txtName.Text.Replace(" ", "").ToUpper()).Count() == 0)
-                            rule = parent.es.Rules.AddRulesRow(txtName.Text.Trim(), "", "");
+                        {
+                            rule = parent.es.Rules.NewRulesRow();
+                            rule.Имя = txtName.Text.Trim();
+                            parent.es.Rules.Rows.InsertAt(rule,parent.dataRules.SelectedRows[0].Index+1);
+                            int index = parent.dataRules.SelectedRows[0].Index;
+                            parent.dataRules.Rows[index + 1].Selected = true;
+                            parent.dataRules.Rows[index].Selected = false;
+                            parent.dataRules.FirstDisplayedScrollingRowIndex = parent.dataRules.SelectedRows[0].Index;
+                        }
                         else throw new System.Data.ConstraintException("Правило с таким именем уже существует");
                     else
                     {
@@ -100,8 +108,7 @@ namespace ESshell
                     rule.Посылка = left;
                     if (editrow >= 0)
                         this.Close();
-                    else parent.dataRules.Rows[parent.dataRules.Rows.Count - 1].Selected = true;
-                    parent.dataRules.FirstDisplayedScrollingRowIndex = parent.dataRules.Rows.Count - 1;
+                    //else parent.dataRules.Rows[parent.dataRules.Rows.Count - 1].Selected = true;
                     this.Close();
                     dataLSide.Rows.Clear();
                     dataRSide.Rows.Clear();

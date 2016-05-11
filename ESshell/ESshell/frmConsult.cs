@@ -13,7 +13,7 @@ namespace ESshell
 {
     public partial class frmConsult : Form
     {
-        private ESys es;
+        public ESys es;
         Stack<string> goals = new Stack<string>();
         string maingoal;
         string currentvariable;
@@ -60,7 +60,6 @@ namespace ESshell
         {
                 string message = "";
                 string tmp;
-                run(maingoal, out tmp, currentnode);
                 int status = run(maingoal, out tmp, currentnode);
                 if (status == 0)
                 {
@@ -126,7 +125,9 @@ namespace ESshell
                             this.cmbAnswer.DataSource = bindAnswer;
                             this.txtQuestion.Text = savedquest;
                             this.cmbAnswer.SelectedIndex = 0;
+                            this.btnOk.Enabled = true;
                         }));
+
                         clickEvent.Reset();
                         clickEvent.WaitOne();   //ждем сигнала
                         
@@ -134,6 +135,7 @@ namespace ESshell
                         ((Form)this).Invoke((Action)(() =>
                         { row = cmbAnswer.SelectedItem as DataRow; 
                         add_to_workmemory(currentvariable, row[1].ToString(),tn.Text);
+                        btnOk.Enabled = false;
                         }));
                      return Convert.ToInt32(row[1].ToString() == value); 
                 default: return -2;
@@ -279,6 +281,16 @@ namespace ESshell
         {
             
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult dialog = MessageBox.Show("Выдействительно хотите выйти?", "Внимание", MessageBoxButtons.YesNo);
+            if (dialog == DialogResult.Yes)
+            {
+                currentnode = null;
+                this.Close();
+            }
         }
     }
 }

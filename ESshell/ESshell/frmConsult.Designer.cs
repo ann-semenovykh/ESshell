@@ -33,6 +33,7 @@
             this.cmbAnswer = new System.Windows.Forms.ComboBox();
             this.btnOk = new System.Windows.Forms.Button();
             this.bindAnswer = new System.Windows.Forms.BindingSource(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bindAnswer)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,11 +65,22 @@
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(195, 164);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Отменить";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // frmConsult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 180);
+            this.ClientSize = new System.Drawing.Size(292, 194);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.cmbAnswer);
             this.Controls.Add(this.txtQuestion);
@@ -93,5 +105,6 @@
         private System.Windows.Forms.BindingSource bindAnswer;
         public System.Windows.Forms.ComboBox cmbAnswer;
         public System.Windows.Forms.TextBox txtQuestion;
+        private System.Windows.Forms.Button button1;
     }
 }

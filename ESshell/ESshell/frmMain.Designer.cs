@@ -56,6 +56,9 @@
             this.tabVars = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.dataVars = new System.Windows.Forms.DataGridView();
+            this.btnSaveVar = new System.Windows.Forms.Button();
+            this.txtQuest = new System.Windows.Forms.TextBox();
+            this.cmbType = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnVarDel = new System.Windows.Forms.Button();
             this.btnVarEdit = new System.Windows.Forms.Button();
@@ -74,9 +77,6 @@
             this.bindVars = new System.Windows.Forms.BindingSource(this.components);
             this.bindDomen = new System.Windows.Forms.BindingSource(this.components);
             this.bindDomenVal = new System.Windows.Forms.BindingSource(this.components);
-            this.cmbType = new System.Windows.Forms.ComboBox();
-            this.txtQuest = new System.Windows.Forms.TextBox();
-            this.btnSaveVar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabRules.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
@@ -387,6 +387,39 @@
             this.dataVars.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataVars.SelectionChanged += new System.EventHandler(this.dataVars_SelectionChanged);
             // 
+            // btnSaveVar
+            // 
+            this.btnSaveVar.Location = new System.Drawing.Point(82, 389);
+            this.btnSaveVar.Name = "btnSaveVar";
+            this.btnSaveVar.Size = new System.Drawing.Size(137, 28);
+            this.btnSaveVar.TabIndex = 4;
+            this.btnSaveVar.Text = "Применить";
+            this.btnSaveVar.UseVisualStyleBackColor = true;
+            this.btnSaveVar.Click += new System.EventHandler(this.btnSaveVar_Click);
+            // 
+            // txtQuest
+            // 
+            this.txtQuest.Location = new System.Drawing.Point(40, 238);
+            this.txtQuest.Multiline = true;
+            this.txtQuest.Name = "txtQuest";
+            this.txtQuest.Size = new System.Drawing.Size(214, 129);
+            this.txtQuest.TabIndex = 3;
+            this.txtQuest.TextChanged += new System.EventHandler(this.txtQuest_TextChanged);
+            // 
+            // cmbType
+            // 
+            this.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbType.FormattingEnabled = true;
+            this.cmbType.Items.AddRange(new object[] {
+            "Выводимая",
+            "Запрашиваемая",
+            "Выводимо-запрашиваемая"});
+            this.cmbType.Location = new System.Drawing.Point(40, 201);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Size = new System.Drawing.Size(214, 21);
+            this.cmbType.TabIndex = 2;
+            this.cmbType.SelectedIndexChanged += new System.EventHandler(this.cmbType_SelectedIndexChanged);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.btnVarDel);
@@ -566,39 +599,6 @@
             // 
             this.bindDomen.CurrentChanged += new System.EventHandler(this.bindDomen_CurrentChanged);
             // 
-            // cmbType
-            // 
-            this.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbType.FormattingEnabled = true;
-            this.cmbType.Items.AddRange(new object[] {
-            "Выводимая",
-            "Запрашиваемая",
-            "Выводимо-запрашиваемая"});
-            this.cmbType.Location = new System.Drawing.Point(40, 201);
-            this.cmbType.Name = "cmbType";
-            this.cmbType.Size = new System.Drawing.Size(214, 21);
-            this.cmbType.TabIndex = 2;
-            this.cmbType.SelectedIndexChanged += new System.EventHandler(this.cmbType_SelectedIndexChanged);
-            // 
-            // txtQuest
-            // 
-            this.txtQuest.Location = new System.Drawing.Point(40, 238);
-            this.txtQuest.Multiline = true;
-            this.txtQuest.Name = "txtQuest";
-            this.txtQuest.Size = new System.Drawing.Size(214, 129);
-            this.txtQuest.TabIndex = 3;
-            this.txtQuest.TextChanged += new System.EventHandler(this.txtQuest_TextChanged);
-            // 
-            // btnSaveVar
-            // 
-            this.btnSaveVar.Location = new System.Drawing.Point(82, 389);
-            this.btnSaveVar.Name = "btnSaveVar";
-            this.btnSaveVar.Size = new System.Drawing.Size(137, 28);
-            this.btnSaveVar.TabIndex = 4;
-            this.btnSaveVar.Text = "Применить";
-            this.btnSaveVar.UseVisualStyleBackColor = true;
-            this.btnSaveVar.Click += new System.EventHandler(this.btnSaveVar_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -608,7 +608,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Оболочка ЭС";
+            this.Text = "Оболочка ЭС Семеновых Анны";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

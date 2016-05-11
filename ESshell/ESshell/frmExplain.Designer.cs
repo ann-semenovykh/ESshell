@@ -38,6 +38,7 @@
             this.Val = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnOK = new System.Windows.Forms.Button();
             this.bindVarVal = new System.Windows.Forms.BindingSource(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpRules.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -140,11 +141,23 @@
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.Location = new System.Drawing.Point(12, 409);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Expand";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // frmExplain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(535, 444);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.tabControl1);
             this.MinimizeBox = false;
@@ -175,5 +188,6 @@
         public System.Windows.Forms.DataGridView dataVarVal;
         private System.Windows.Forms.DataGridViewTextBoxColumn Var;
         private System.Windows.Forms.DataGridViewTextBoxColumn Val;
+        private System.Windows.Forms.Button button1;
     }
 }

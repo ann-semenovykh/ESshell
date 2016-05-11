@@ -109,14 +109,14 @@ namespace ESshell
                         }
                         else return;
                     else
-                        if (check_use("", cmbDomen.SelectedItem.ToString()))
+                        
                             if (parent.es.Variable.Where(ex => ex.Имя.Replace(" ", "").ToUpper() == txtName.Text.Replace(" ", "").ToUpper()).Count() == 0)
                                 parent.es.Variable.AddVariableRow(txtName.Text.Trim(), cmbType.SelectedItem.ToString(),
                                     cmbDomen.SelectedItem.ToString(), txtQuest.Text.Trim());
                             else throw new System.Data.ConstraintException("Переменная с таким именем уже существует");
-                        else return;
+                        
                     parent.dataVars.FirstDisplayedScrollingRowIndex = parent.dataVars.Rows.Count - 1;
-                    if (editrow<0)
+                    if (editrow < 0)
                     {
                         txtName.Clear();
                         txtQuest.Clear();
@@ -126,7 +126,10 @@ namespace ESshell
                         this.Close();
                     }
                     else
-                    this.Close();
+                    {
+                        
+                        this.Close();
+                    }
                 }
                 catch (System.Data.ConstraintException ex)
                 {
@@ -152,6 +155,8 @@ namespace ESshell
                 cmbDomen.Items.Add(parent.es.Domens[i][0]);
             cmbDomen.SelectedIndex = selection;
             this.Show();
+            this.btnSave.Text = "Применить";
+            cmbDomen.SelectedIndex = parent.es.Domens.Rows.Count - 1;
         }
 
         private void frmAddVar_Load(object sender, EventArgs e)

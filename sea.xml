@@ -757,12 +757,12 @@
     <Fact>-32</Fact>
   </LSide>
   <LSide>
-    <Имя>RSPEC20</Имя>
-    <Fact>-37</Fact>
-  </LSide>
-  <LSide>
     <Имя>RSPEC21</Имя>
     <Fact>-35</Fact>
+  </LSide>
+  <LSide>
+    <Имя>RSPEC20</Имя>
+    <Fact>-37</Fact>
   </LSide>
   <Fact>
     <id>-1</id>
@@ -1472,11 +1472,31 @@
     <Fact>-69</Fact>
   </RSide>
   <RSide>
-    <Имя>RSPEC20</Имя>
-    <Fact>-70</Fact>
-  </RSide>
-  <RSide>
     <Имя>RSPEC21</Имя>
     <Fact>-71</Fact>
   </RSide>
+  <RSide>
+    <Имя>RSPEC20</Имя>
+    <Fact>-70</Fact>
+  </RSide>
+  <WorkMemory>
+    <fact>-6</fact>
+    <rule>RFEAT1</rule>
+  </WorkMemory>
+  <WorkMemory>
+    <fact>-7</fact>
+    <rule>RFEAT3</rule>
+  </WorkMemory>
+  <WorkMemory>
+    <fact>-36</fact>
+    <rule>RFAM12</rule>
+  </WorkMemory>
+  <WorkMemory>
+    <fact>-37</fact>
+    <rule>RFAM13</rule>
+  </WorkMemory>
+  <WorkMemory>
+    <fact>-70</fact>
+    <rule>RSPEC20</rule>
+  </WorkMemory>
 </ESys>

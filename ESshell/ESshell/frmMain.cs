@@ -118,9 +118,35 @@ namespace ESshell
                 return (row.Count() > 0 ? false : true);
             }
         }
+        private void update_rule(string oldname,string newname)
+        {
+            ESys.RulesRow[] rules = es.Rules.Where(e => e.Посылка.Contains(oldname) || e.Заключение.Contains(oldname)).ToArray();
+            foreach (ESys.RulesRow rule in rules)
+            {
+                string left = String.Join(" AND ",
+                        from lefts in es.LSide
+                        join vals in es.Fact
+                        on lefts.Fact equals vals.id
+                        where lefts.Имя == rule.Имя
+                        select vals.Переменная + " = " + vals.Значение_переменной
+                        );
+                string right = String.Join(" AND ",
+                    from lefts in es.RSide
+                    join vals in es.Fact
+                    on lefts.Fact equals vals.id
+                    where lefts.Имя == rule.Имя
+                    select vals.Переменная + " = " + vals.Значение_переменной
+                    );
+                rule.Заключение = " THEN " + right;
+                rule.Посылка = left;
+               // rule.Посылка = rule.Посылка.Replace(oldname, newname);
+               // rule.Заключение = rule.Посылка.Replace(oldname, newname);
+            }
+
+        }
         private void edit_domen()
         {
-            if (dataDomen.SelectedCells == null)
+            if (dataDomen.SelectedRows.Count == 0)
                 MessageBox.Show("Выберите домен для изменения");
             else{
 
@@ -128,21 +154,13 @@ namespace ESshell
                     frmAddDomen frm = new frmAddDomen(this, dr, dataDomen.SelectedRows[0].Index);
                 if (!check_dom_in_rule(dataDomen.SelectedRows[0].Cells[0].Value.ToString()))
                 {
-                    MessageBox.Show("Функциональность ограничена\nЗначения домена уже используются в правилах\nИзменение значений запрещено", "Внимание");
+                    MessageBox.Show("Значения домена уже используются в правилах\nИзменение значений домена запрещено", "Внимание");
                     frm.dataVDom.AllowUserToAddRows = false;
                 }
 
                 frm.ShowDialog(this);
+                
                 }
-                //if (check_dom_in_rule(dataDomen.SelectedRows[0].Cells[0].Value.ToString()))
-                //{
-
-                //    ESys.DomensRow dr = es.Domens.Where(e => e.Имя_домена == dataDomen.SelectedRows[0].Cells[0].Value.ToString()).First();
-                //    frmAddDomen frm = new frmAddDomen(this, dr, dataDomen.SelectedRows[0].Index);
-                //    frm.ShowDialog(this);
-                    
-                //}
-                //else MessageBox.Show("Значения домена уже используются в правилах","Изменение запрещено");
         }
         private void добавитьToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -165,7 +183,7 @@ namespace ESshell
         }
         void delete_domen()
         {
-            if (dataDomen.SelectedCells == null)
+            if (dataDomen.SelectedRows.Count==0)
                 MessageBox.Show("Выберите домен для изменения");
             else
                 if (check_dom_in_rule(dataDomen.SelectedRows[0].Cells[0].Value.ToString()))
@@ -394,7 +412,7 @@ namespace ESshell
         
         private void edit_var()
         {
-            if (dataVars.SelectedCells == null)
+            if (dataVars.SelectedRows.Count == 0)
                 MessageBox.Show("Выберите переменную для изменения");
             else
                 {
@@ -402,10 +420,12 @@ namespace ESshell
                 frmAddVar frm = new frmAddVar(this, dr, dataVars.SelectedRows[0].Index);
                 if (!check_var_in_rule(dataVars.SelectedRows[0].Cells[0].Value.ToString()))
                 {
-                    MessageBox.Show("Функциональность ограничена\nПеременная уже используется в правиле\nИзменение домена запрещено", "Внимание");
+                    MessageBox.Show("Переменная уже используется в правиле\nИзменение домена запрещено", "Внимание");
                     frm.cmbDomen.Enabled = false;
                 }
+                string tmp=dataVars.SelectedRows[0].Cells[0].Value.ToString();
                 frm.ShowDialog(this);
+                update_rule(tmp, dataVars.SelectedRows[0].Cells[0].Value.ToString());
                 }
         //        if (check_var_in_rule(dataVars.SelectedRows[0].Cells[0].Value.ToString()))
         //        {
@@ -426,6 +446,8 @@ namespace ESshell
         {
             edit_var();
             btnSaveVar.Visible = false;
+
+            dataVars_SelectionChanged(sender, e);
         }
 
         private void сохранитьКакToolStripMenuItem_Click(object sender, EventArgs e)
@@ -449,7 +471,7 @@ namespace ESshell
             {
                 try
                 {
-                    es.Clear();
+                    es.Clear(); 
                     es.ReadXml(of.FileName, XmlReadMode.IgnoreSchema);
                     filename = of.FileName;
                 }
@@ -466,7 +488,7 @@ namespace ESshell
         }
         void del_var()
         {
-            if (dataVars.SelectedRows == null)
+            if (dataVars.SelectedRows.Count == 0)
                 MessageBox.Show("Выберите переменную для удаления");
             else
                 if (check_var_in_rule(dataVars.SelectedRows[0].Cells[0].Value.ToString()))
@@ -492,7 +514,7 @@ namespace ESshell
         }
         void edit_rule()
         {
-            if (dataRules.SelectedRows != null)
+            if (dataRules.SelectedRows.Count >0)
             {
                 frmAddRule frm = new frmAddRule(this, es.Rules.FindByИмя(dataRules.SelectedRows[0].Cells[0].Value.ToString()), dataRules.SelectedRows[0].Index);
                 frm.ShowDialog();
@@ -516,7 +538,7 @@ namespace ESshell
         }
         void del_rule()
         {
-            if (dataRules.SelectedRows == null)
+            if (dataRules.SelectedRows.Count == 0)
                 MessageBox.Show("Выберите правило для удаления");
             else
             {
@@ -585,12 +607,13 @@ namespace ESshell
 
             }
             frmConsult frm = new frmConsult(es, goal);
-            
-             frm.ShowDialog();
-            TreeNode tmp=new TreeNode();
-            tree = null;   
-            tree  = (TreeNode)frm.currentnode.Clone();
-            
+            frm.ShowDialog();
+            TreeNode tmp = new TreeNode();
+            if (frm.currentnode != null)
+            {
+                tree = null;
+                tree = (TreeNode)frm.currentnode.Clone();
+            }
         }
 
         private Rectangle dragBoxFromMouseDownRule;

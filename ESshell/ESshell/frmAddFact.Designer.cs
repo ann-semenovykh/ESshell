@@ -130,6 +130,7 @@
             // 
             // btnAddVar
             // 
+            this.btnAddVar.AccessibleDescription = "";
             this.btnAddVar.Location = new System.Drawing.Point(28, 32);
             this.btnAddVar.Name = "btnAddVar";
             this.btnAddVar.Size = new System.Drawing.Size(21, 22);
